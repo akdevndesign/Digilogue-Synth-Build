@@ -4,7 +4,6 @@ export const oscOneVolume = new Tone.Volume(-30).toDestination();
 
 export const oscOneDelay = new Tone.Delay({
   delayTime: 0,
-  maxDelay: 170,
   wet: 100,
 }).connect(oscOneVolume);
 
@@ -29,7 +28,7 @@ export const oscOneResFilter = new Tone.Filter({
 }).connect(oscOneVibrato);
 
 export const oscOneEnvelope = new Tone.AmplitudeEnvelope({
-  attack: 0,
+  attack: 1,
   decay: 1,
   sustain: 1,
   release: 1,

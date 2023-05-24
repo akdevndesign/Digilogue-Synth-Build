@@ -144,7 +144,7 @@ class ControlledPiano extends React.Component {
     if (this.props.disabled) {
       return;
     }
-    if (this.state.oscillatorStatus) {
+    if (this.props.oscillatorStatus) {
       // Play note using the oscillator module
       this.props.playNoteWithOscillator(midiNumber);
     } else {
@@ -152,12 +152,11 @@ class ControlledPiano extends React.Component {
       this.props.playNote(midiNumber);
     }
   };
-
   onStopNoteInput = (midiNumber) => {
     if (this.props.disabled) {
       return;
     }
-    if (this.state.oscillatorStatus) {
+    if (this.props.oscillatorStatus) {
       // Stop note using the oscillator module
       this.props.stopNoteWithOscillator(midiNumber);
     } else {
@@ -165,7 +164,7 @@ class ControlledPiano extends React.Component {
       this.props.stopNote(midiNumber);
     }
   };
-
+  
   onMouseDown = () => {
     this.setState({
       isMouseDown: true,

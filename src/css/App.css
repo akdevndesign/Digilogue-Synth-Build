@@ -1,12 +1,13 @@
 .container {
+    display: flex;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr ;
-    gap: 0px 10px;
-    grid-auto-flow: row;
+    grid-template-columns: 2fr 2fr 2fr 2fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 5px;
+    grid-auto-flow: column;
     grid-template-areas:
-        "OSCIS LFO ."
-        "FILTER . .";
+        "OSCIS LFO FILTER ENVELOPE"
+        ". PIANO . .";
     height: 100vh;
     width: 100vw;
 }
@@ -21,6 +22,17 @@
     align-items: center;
     justify-content: center;
 }
+.ENVELOPE > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.LFO > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .OSC1_Q_FLTR {
     grid-area: OSC1_Q_FLTR;
 }
@@ -139,7 +151,7 @@
     "OSC1_ENV_ATK OSC1_ENVATK OSC1_ENV_DECAY OSC1_ENVDEC OSC1_ENV_SUS OSC1_ENVSUS OSC1_ENV_REL OSC1_ENVREL"
     "OSC2_ENV_ATK OSC2_ENVATK OSC2_ENV_DECAY OSC2_ENVDEC OSC2_ENV_SUS OSC2_ENVSUS OSC2_ENV_REL OSC2_ENVREL"
     "OSC3_ENV_ATK OSC3_ENVATK OSC3_ENV_DECAY OSC3_ENVDEC OSC3_ENV_SUS OSC3_ENVSUS OSC3_ENV_REL OSC3_ENVREL";
-    grid-area: FILTER;
+    grid-area: ENVELOPE;
     background-color: transparent;
     transform: scale(0.8, 0.8);
     border-radius: 10px;

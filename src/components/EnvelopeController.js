@@ -17,22 +17,22 @@ export function EnvelopeController({
   const [enRelease, setEnRelease] = useState(0);
 
   const changeAttack = (value) => {
-    envAttack.rampTo(value, 0.01); // Update the value directly since it's a number
+    envAttack = value; // Update the value directly since it's a number
     setEnAttack(value);
   };
 
   const changeDecay = (value) => {
-    envDecay.rampTo(value, 0.01);
+    envDecay = value;
     setEnDecay(value);
   };
 
   const changeSustain = (value) => {
-    envSustain.rampTo(value, 0.01);
+    envSustain = value;
     setEnSustain(value);
   };
 
   const changeRelease = (value) => {
-    envRelease.rampTo(value, 0.01);
+    envRelease = value;
     setEnRelease(value);
     };
 

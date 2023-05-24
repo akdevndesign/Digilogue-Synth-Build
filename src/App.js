@@ -1,6 +1,6 @@
 import "./css/App.css";
 import "./css/Piano.css";
-import React from "react";
+import React, { useRef } from "react";
 import * as Tone from "tone";
 import {
   oscTwoVolume,
@@ -28,12 +28,16 @@ import {
   oscThree,
 } from "./module_routes/oscThree";
 
-import { Oscillator, EnvelopeController, LFOController, EnvelopeController,  } from "./components/";
-
+import { Oscillator } from "./components/OscillatorController";
+import { LFOController } from "./components/LFOController";
+import { FilterController } from "./components/FilterController";
+import { EnvelopeController } from "./components/EnvelopeController";
+import { PianoController } from "./components/PianoController";
 import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
 import "react-piano/dist/styles.css";
 
 function App() {
+  const pianoRef = useRef(null);
   const ACTX = Tone.context; //setting up Tone.js + Web Audio API
   const firstNote = MidiNumbers.fromNote("c3");
   const lastNote = MidiNumbers.fromNote("f5");
@@ -54,7 +58,6 @@ function App() {
           synth={oscThree}
         />
       </div>
-
       <div className="FILTER">
         <FilterController
           type={"OSC1"}
@@ -113,19 +116,36 @@ function App() {
           envRelease={oscThreeEnvelope.release}
         />
       </div>
-      <div className="PIANO">
-        <Piano
-          noteRange={{ first: firstNote, last: lastNote }}
-          playNote={(midiNumber) => {
-            // Play a given note - see notes below
-          }}
-          stopNote={(midiNumber) => {
-            // Stop playing a given note - see notes below
-          }}
-          width={1000}
-          keyboardShortcuts={keyboardShortcuts}
-        />
-      </div>
+      <Piano
+  ref={pianoRef}
+  noteRange={{ first: firstNote, last: lastNote }}
+  playNote={(midiNumber) => {
+    // Play a given note
+    if (oscOne.status) {
+      oscOne.triggerAttack(Tone.Midi(midiNumber).toFrequency());
+    }
+    if (oscTwo.status) {
+      oscTwo.triggerAttack(Tone.Midi(midiNumber).toFrequency());
+    }
+    if (oscThree.status) {
+      oscThree.triggerAttack(Tone.Midi(midiNumber).toFrequency());
+    }
+  }}
+  stopNote={(midiNumber) => {
+    // Stop playing a given note
+    if (oscOne.status) {
+      oscOne.triggerRelease(Tone.Midi(midiNumber).toFrequency());
+    }
+    if (oscTwo.status) {
+      oscTwo.triggerRelease(Tone.Midi(midiNumber).toFrequency());
+    }
+    if (oscThree.status) {
+      oscThree.triggerRelease(Tone.Midi(midiNumber).toFrequency());
+    }
+  }}
+  width={1000}
+  keyboardShortcuts={keyboardShortcuts}
+/>
     </div>
   );
 }
