@@ -1,9 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import classNames from "classnames";
-import difference from "lodash.difference";
-import Keyboard from "./Keyboard";
-import { Oscillator } from "./OscillatorController";
+import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import difference from 'lodash.difference';
+import Keyboard from './Keyboard';
 
 class ControlledPiano extends React.Component {
   static propTypes = {
@@ -18,29 +17,22 @@ class ControlledPiano extends React.Component {
     disabled: PropTypes.bool,
     width: PropTypes.number,
     keyWidthToHeight: PropTypes.number,
-    oscillatorStatus: PropTypes.bool.isRequired,
-    toggleOscillator: PropTypes.func.isRequired,
     keyboardShortcuts: PropTypes.arrayOf(
       PropTypes.shape({
         key: PropTypes.string.isRequired,
         midiNumber: PropTypes.number.isRequired,
-      })
+      }),
     ),
   };
 
   static defaultProps = {
-    renderNoteLabel: ({
-      keyboardShortcut,
-      midiNumber,
-      isActive,
-      isAccidental,
-    }) =>
+    renderNoteLabel: ({ keyboardShortcut, midiNumber, isActive, isAccidental }) =>
       keyboardShortcut ? (
         <div
-          className={classNames("ReactPiano__NoteLabel", {
-            "ReactPiano__NoteLabel--active": isActive,
-            "ReactPiano__NoteLabel--accidental": isAccidental,
-            "ReactPiano__NoteLabel--natural": !isAccidental,
+          className={classNames('ReactPiano__NoteLabel', {
+            'ReactPiano__NoteLabel--active': isActive,
+            'ReactPiano__NoteLabel--accidental': isAccidental,
+            'ReactPiano__NoteLabel--natural': !isAccidental,
           })}
         >
           {keyboardShortcut}
@@ -54,13 +46,13 @@ class ControlledPiano extends React.Component {
   };
 
   componentDidMount() {
-    window.addEventListener("keydown", this.onKeyDown);
-    window.addEventListener("keyup", this.onKeyUp);
+    window.addEventListener('keydown', this.onKeyDown);
+    window.addEventListener('keyup', this.onKeyUp);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("keydown", this.onKeyDown);
-    window.removeEventListener("keyup", this.onKeyUp);
+    window.removeEventListener('keydown', this.onKeyDown);
+    window.removeEventListener('keyup', this.onKeyUp);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -81,22 +73,10 @@ class ControlledPiano extends React.Component {
     const notesStopped = difference(prevActiveNotes, nextActiveNotes);
     const notesStarted = difference(nextActiveNotes, prevActiveNotes);
     notesStarted.forEach((midiNumber) => {
-      if (this.state.oscillatorStatus) {
-        // Play note using the oscillator module
-        this.props.playNoteWithOscillator(midiNumber);
-      } else {
-        // Play note using the default method
-        this.props.playNote(midiNumber);
-      }
+      this.props.playNote(midiNumber);
     });
     notesStopped.forEach((midiNumber) => {
-      if (this.state.oscillatorStatus) {
-        // Stop note using the oscillator module
-        this.props.stopNoteWithOscillator(midiNumber);
-      } else {
-        // Stop note using the default method
-        this.props.stopNote(midiNumber);
-      }
+      this.props.stopNote(midiNumber);
     });
   };
 
@@ -112,9 +92,7 @@ class ControlledPiano extends React.Component {
     if (!this.props.keyboardShortcuts) {
       return null;
     }
-    const shortcut = this.props.keyboardShortcuts.find(
-      (sh) => sh.midiNumber === midiNumber
-    );
+    const shortcut = this.props.keyboardShortcuts.find((sh) => sh.midiNumber === midiNumber);
     return shortcut && shortcut.key;
   };
 
@@ -140,31 +118,23 @@ class ControlledPiano extends React.Component {
       this.onStopNoteInput(midiNumber);
     }
   };
+
   onPlayNoteInput = (midiNumber) => {
     if (this.props.disabled) {
       return;
     }
-    if (this.props.oscillatorStatus) {
-      // Play note using the oscillator module
-      this.props.playNoteWithOscillator(midiNumber);
-    } else {
-      // Play note using the default method
-      this.props.playNote(midiNumber);
-    }
+    // Pass in previous activeNotes for recording functionality
+    this.props.onPlayNoteInput(midiNumber, this.props.activeNotes);
   };
+
   onStopNoteInput = (midiNumber) => {
     if (this.props.disabled) {
       return;
     }
-    if (this.props.oscillatorStatus) {
-      // Stop note using the oscillator module
-      this.props.stopNoteWithOscillator(midiNumber);
-    } else {
-      // Stop note using the default method
-      this.props.stopNote(midiNumber);
-    }
+    // Pass in previous activeNotes for recording functionality
+    this.props.onStopNoteInput(midiNumber, this.props.activeNotes);
   };
-  
+
   onMouseDown = () => {
     this.setState({
       isMouseDown: true,
@@ -185,18 +155,13 @@ class ControlledPiano extends React.Component {
 
   renderNoteLabel = ({ midiNumber, isActive, isAccidental }) => {
     const keyboardShortcut = this.getKeyForMidiNumber(midiNumber);
-    return this.props.renderNoteLabel({
-      keyboardShortcut,
-      midiNumber,
-      isActive,
-      isAccidental,
-    });
+    return this.props.renderNoteLabel({ keyboardShortcut, midiNumber, isActive, isAccidental });
   };
 
   render() {
     return (
       <div
-        style={{ width: "100%", height: "100%" }}
+        style={{ width: '100%', height: '100%' }}
         onMouseDown={this.onMouseDown}
         onMouseUp={this.onMouseUp}
         onTouchStart={this.onTouchStart}
@@ -214,8 +179,6 @@ class ControlledPiano extends React.Component {
           gliss={this.state.isMouseDown}
           useTouchEvents={this.state.useTouchEvents}
           renderNoteLabel={this.renderNoteLabel}
-          oscillatorStatus={this.state.oscillatorStatus}
-          toggleOscillator={this.toggleOscillator}
         />
       </div>
     );

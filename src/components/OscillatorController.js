@@ -42,18 +42,17 @@ export function Oscillator({ type, synth, synthVolume }) {
     };
 
     // A function to handle playing and stopping the oscillator
-    const handlePlay = () => {
-        if (!playingSynth.current) {
-          synth.triggerAttack();
-          playingSynth.current = true;
-          setStatus(true);
-        } else {
-          synth.triggerRelease();
-          playingSynth.current = false;
-          setStatus(false);
-        }
-      };
-      
+  const handlePlay = () => {
+  if (!playingSynth.current) {
+    synth.triggerAttack();
+    playingSynth.current = true;
+    setStatus(true);
+  } else {
+    synth.triggerRelease();
+    playingSynth.current = false;
+    setStatus(false);
+  }
+};
     // Return the JSX for the oscillator component
     return (
         <Fragment>

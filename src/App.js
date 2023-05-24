@@ -1,6 +1,6 @@
 import "./css/App.css";
 import "./css/Piano.css";
-import React, { useRef } from "react";
+import React from "react";
 import * as Tone from "tone";
 import {
   oscTwoVolume,
@@ -32,15 +32,15 @@ import { Oscillator } from "./components/OscillatorController";
 import { LFOController } from "./components/LFOController";
 import { FilterController } from "./components/FilterController";
 import { EnvelopeController } from "./components/EnvelopeController";
-import { PianoController } from "./components/PianoController";
+import { ControlledPiano } from "./components/ControlledKeyboard";
 import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
 import "react-piano/dist/styles.css";
 
 function App() {
-  const pianoRef = useRef(null);
   const ACTX = Tone.context; //setting up Tone.js + Web Audio API
-  const firstNote = MidiNumbers.fromNote("c3");
-  const lastNote = MidiNumbers.fromNote("f5");
+  const firstNote = MidiNumbers.fromNote('c3');
+  const lastNote = MidiNumbers.fromNote('f5');
+
   const keyboardShortcuts = KeyboardShortcuts.create({
     firstNote: firstNote,
     lastNote: lastNote,
@@ -116,36 +116,18 @@ function App() {
           envRelease={oscThreeEnvelope.release}
         />
       </div>
+
       <Piano
-  ref={pianoRef}
-  noteRange={{ first: firstNote, last: lastNote }}
-  playNote={(midiNumber) => {
-    // Play a given note
-    if (oscOne.status) {
-      oscOne.triggerAttack(Tone.Midi(midiNumber).toFrequency());
-    }
-    if (oscTwo.status) {
-      oscTwo.triggerAttack(Tone.Midi(midiNumber).toFrequency());
-    }
-    if (oscThree.status) {
-      oscThree.triggerAttack(Tone.Midi(midiNumber).toFrequency());
-    }
-  }}
-  stopNote={(midiNumber) => {
-    // Stop playing a given note
-    if (oscOne.status) {
-      oscOne.triggerRelease(Tone.Midi(midiNumber).toFrequency());
-    }
-    if (oscTwo.status) {
-      oscTwo.triggerRelease(Tone.Midi(midiNumber).toFrequency());
-    }
-    if (oscThree.status) {
-      oscThree.triggerRelease(Tone.Midi(midiNumber).toFrequency());
-    }
-  }}
-  width={1000}
-  keyboardShortcuts={keyboardShortcuts}
-/>
+      noteRange={{ first: firstNote, last: lastNote }}
+      playNote={(midiNumber) => {
+        // Play a given note - see notes below
+      }}
+      stopNote={(midiNumber) => {
+        // Stop playing a given note - see notes below
+      }}
+      width={1000}
+      keyboardShortcuts={keyboardShortcuts}
+    />
     </div>
   );
 }
