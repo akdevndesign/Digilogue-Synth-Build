@@ -21,15 +21,9 @@ export const oscThreeResFilter = new Tone.Filter({
     frequency: 350,
 }).connect(oscThreeVibrato);
 
-export const oscThreeEnvelope = new Tone.AmplitudeEnvelope({
-  attack: 0,
-  decay: 1,
-  sustain: 1,
-  release: 1,
-}).connect(oscThreeResFilter);
-
 export const oscThree = new Tone.MonoSynth({
   volume: -8,
+  mute: false,
   oscillator: {
     type: "sawtooth",
     frequency: 150,
@@ -40,4 +34,4 @@ export const oscThree = new Tone.MonoSynth({
     sustain: 1,
     release: 0.1,
   },
-}).connect(oscThreeEnvelope);
+}).connect(oscThreeResFilter);

@@ -22,15 +22,9 @@ export const oscTwoResFilter = new Tone.Filter({
     resonance: 300,
 }).connect(oscTwoVibrato);
 
-export const oscTwoEnvelope = new Tone.AmplitudeEnvelope({
-  attack: 0,
-  decay: 1,
-  sustain: 1,
-  release: 1,
-}).connect(oscTwoResFilter);
-
 export const oscTwo = new Tone.MonoSynth({
   volume: -8,
+  mute: false,
   oscillator: {
     type: "sine6",
     frequency: 150,
@@ -41,4 +35,4 @@ export const oscTwo = new Tone.MonoSynth({
     sustain: 1,
     release: 0.1,
   },
-}).connect(oscTwoEnvelope);
+}).connect(oscTwoResFilter);

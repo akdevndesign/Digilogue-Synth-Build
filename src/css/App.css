@@ -1,22 +1,21 @@
 .container {
-    display: flex;
     display: grid;
-    grid-template-columns: 2fr 2fr 2fr 2fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
     gap: 0px 5px;
-    grid-auto-flow: column;
+    grid-auto-flow: row;
     grid-template-areas:
-        "OSCIS LFO FILTER ENVELOPE"
-        ". PIANO . .";
+        "OSCIS"
+        "PIANO";
     height: 100vh;
     width: 100vw;
 }
-
+/* 
 .OSCIS > div {
-    display: flex;
+
     align-items: center;
     justify-content: center;
-}
+} */
 .FILTER > div {
     display: flex;
     align-items: center;
@@ -42,8 +41,8 @@
 .OSC3_Q_FLTR {
     grid-area: OSC3_Q_FLTR;
 }
-.OSC1_FLTRQ {
-    grid-area: OSC1_FLTRQ;
+.FLTRQ {
+    grid-area: FLTRQ;
 }
 .OSC2_FLTRQ {
     grid-area: OSC2_FLTRQ;
@@ -60,16 +59,16 @@
 .OSC3_FREQ_FLTR {
     grid-area: OSC3_FREQ_FLTR;
 }
-.OSC1_FLFREQ {
-    grid-area: OSC1_FLFREQ;
+.FLFREQ {
+    grid-area: FLFREQ;
 }
-.OSC2_FLFREQ {
+/* .OSC2_FLFREQ {
     grid-area: OSC2_FLFREQ;
 }
 .OSC3_FLFREQ {
     grid-area: OSC3_FLFREQ;
 }
-
+ */
 
 
 .osc1 {
@@ -95,8 +94,8 @@
 .OSC3_VOL {
     grid-area: OSC3_VOL;
 }
-.OSC1_VOLW {
-    grid-area: OSC1_VOLW;
+.VOLW {
+    grid-area: VOLW;
 }
 
 .FLDT {
@@ -109,13 +108,13 @@
     grid-area: FLRSN
 }
 
-.OSC2_VOLW {
+/* .OSC2_VOLW {
     grid-area: OSC2_VOLW;
-}
+} */
 
-.OSC3_VOLW {
+/* .OSC3_VOLW {
     grid-area: OSC3_VOLW;
-}
+} */
 
 .OSC1_FREQ {
     grid-area: OSC1_FREQ;
@@ -140,17 +139,17 @@
 .OSC3_FREQW {
     grid-area: OSC3_FREQW;
 }
-
+/* 
 .ENVELOPE {
     display: grid;
-    grid-template-columns: 1.4fr 1.4fr 1.4fr 1.4fr 1.4fr 1.4fr 1.4fr 1.4fr;
+    grid-template-columns: .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr;
     grid-template-rows: 1.4fr 1.4fr 1.4fr;
     gap: 0px;
     grid-auto-flow: row;
     grid-template-areas: 
-    "OSC1_ENV_ATK OSC1_ENVATK OSC1_ENV_DECAY OSC1_ENVDEC OSC1_ENV_SUS OSC1_ENVSUS OSC1_ENV_REL OSC1_ENVREL"
-    "OSC2_ENV_ATK OSC2_ENVATK OSC2_ENV_DECAY OSC2_ENVDEC OSC2_ENV_SUS OSC2_ENVSUS OSC2_ENV_REL OSC2_ENVREL"
-    "OSC3_ENV_ATK OSC3_ENVATK OSC3_ENV_DECAY OSC3_ENVDEC OSC3_ENV_SUS OSC3_ENVSUS OSC3_ENV_REL OSC3_ENVREL";
+    OSC1_ENV_ATK OSC1_ENVATK OSC1_ENV_DECAY OSC1_ENVDEC OSC1_ENV_SUS OSC1_ENVSUS OSC1_ENV_REL OSC1_ENVREL
+    OSC2_ENV_ATK OSC2_ENVATK OSC2_ENV_DECAY OSC2_ENVDEC OSC2_ENV_SUS OSC2_ENVSUS OSC2_ENV_REL OSC2_ENVREL
+    OSC3_ENV_ATK OSC3_ENVATK OSC3_ENV_DECAY OSC3_ENVDEC OSC3_ENV_SUS OSC3_ENVSUS OSC3_ENV_REL OSC3_ENVREL
     grid-area: ENVELOPE;
     background-color: transparent;
     transform: scale(0.8, 0.8);
@@ -159,8 +158,8 @@
     margin: 4px;
     padding: 5px;
     text-align: center;
-}
-
+} */
+/* 
 .LFO {
     display: grid;
     grid-template-columns: 1.4fr 1.4fr 1.4fr 1.4fr;
@@ -179,10 +178,10 @@
     margin: 4px;
     padding: 5px;
     text-align: center;
-}
-.FILTER {
+} */
+/* .FILTER {
     display: grid;
-    grid-template-columns: 1.4fr 1.4fr 1.4fr 1.4fr;
+    grid-template-columns: .5fr .5fr .5fr .5fr;
     grid-template-rows: 1.4fr 1.4fr 1.4fr;
     gap: 0px;
     grid-auto-flow: row;
@@ -198,7 +197,7 @@
     margin: 4px;
     padding: 5px;
     text-align: center;
-}
+} */
 
 .LFO > div {
     display: flex;
@@ -207,15 +206,16 @@
 }
 .OSCIS {
     display: grid;
-    grid-template-columns: 1.4fr 1.4fr 1.4fr 1.4fr 1.4fr;
-    grid-template-rows: 1.4fr 1.4fr 1.4fr;
+    /* grid-template-columns: .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr; */
+    grid-template-columns: repeat(11, minmax(0, 1fr));
+    grid-template-rows: .15fr 1.25fr 1fr 1fr;
     gap: 0px 0px;
-    grid-auto-flow: row;
+    /* grid-auto-flow: row; */
     grid-template-areas:
-        "OSC1 OSC1_VOL OSC1_VOLW OSC1_FREQ OSC1_FREQW"
-        "OSC2 OSC2_VOL OSC2_VOLW OSC2_FREQ OSC2_FREQW"
-        "OSC3 OSC3_VOL OSC3_VOLW OSC3_FREQ OSC3_FREQW";
-
+        ". VOLW FREQW FLTRQ FLFREQ ENVATK ENVDEC ENVSUS ENVREL AMW AMWF"
+        "OSC1 OSC1_VOL OSC1_FREQ OSC1_Q_FLTR OSC1_FREQ_FLTR OSC1_ENV_ATK OSC1_ENV_DECAY OSC1_ENV_SUS OSC1_ENV_REL OSC1_LFO_FREQ OSC1_LFOF_FREQ"
+        "OSC2 OSC2_VOL OSC2_FREQ OSC2_Q_FLTR OSC2_FREQ_FLTR OSC2_ENV_ATK OSC2_ENV_DECAY OSC2_ENV_SUS OSC2_ENV_REL OSC2_LFO_FREQ OSC2_LFOF_FREQ"
+        "OSC3 OSC3_VOL OSC3_FREQ OSC3_Q_FLTR OSC3_FREQ_FLTR OSC3_ENV_ATK OSC3_ENV_DECAY OSC3_ENV_SUS OSC3_ENV_REL OSC3_LFO_FREQ OSC3_LFOF_FREQ";
     grid-area: OSCIS;
     background-color: transparent;
     transform: scale(0.8, 0.8);
@@ -240,26 +240,13 @@
 }
 
 .OSCIS > div > button {
-    height: 100%;
+    height: 50%;
     width: 100%;
     background-color: transparent;
     background-color: rgba(113, 197, 131, 0.2);
     cursor: crosshair;
 }
-.FILTER > div > div > button {
-    height: 100%;
-    width: 100%;
-    background-color: transparent;
-    background-color: rgba(0, 0, 0, 0.2);
-    cursor: crosshair;
-}
-.OSCIS > div > div > button {
-    height: 100%;
-    width: 100%;
-    background-color: transparent;
-    background-color: rgba(0, 0, 0, 0.2);
-    cursor: crosshair;
-}
+
 .OSC1_LFO {
     grid-area: OSC1_LFO;
 }
@@ -292,20 +279,16 @@
     grid-area: NOISE_LFO_FREQ;
 }
 
-.OSC1_AMW {
-    grid-area: OSC1_AMW;
+.AMW {
+    grid-area: AMW;
 }
-
+/* 
 .OSC2_AMW {
     grid-area: OSC2_AMW;
-}
+} */
 
 .OSC3_LFOW {
     grid-area: OSC3_LFOW;
-}
-
-.NOISE_LFOW {
-    grid-area: NOISE_LFOW;
 }
 
 .OSC1_LFOF_FREQ {
@@ -320,48 +303,52 @@
     grid-area: OSC3_LFOF_FREQ;
 }
 
-.OSC1_LFOF_FREQW {
-    grid-area: OSC1_LFOF_FREQW;
+.AMWF {
+    grid-area: AMWF;
 }
 
-.OSC2_LFOF_FREQW {
+.FREQW {
+    grid-area: FREQW;
+}
+
+/* .OSC2_LFOF_FREQW {
     grid-area: OSC2_LFOF_FREQW;
 }
 
 .OSC3_LFOF_FREQW {
     grid-area: OSC3_LFOF_FREQW;
-}
+} */
 
 .OSC1_ENV_ATK {
     grid-area: OSC1_ENV_ATK;
 }
-.OSC1_ENVATK {
-    grid-area: OSC1_ENVATK;
+.ENVATK {
+    grid-area: ENVATK;
 }
 .OSC1_ENV_DECAY {
     grid-area: OSC1_ENV_DECAY;
 }
-.OSC1_ENVDEC {
-    grid-area: OSC1_ENVDEC;
+.ENVDEC {
+    grid-area: ENVDEC;
 }
 .OSC1_ENV_SUS {
     grid-area: OSC1_ENV_SUS;
 }
-.OSC1_ENVSUS {
-    grid-area: OSC1_ENVSUS;
+.ENVSUS {
+    grid-area: ENVSUS;
 }
 .OSC1_ENV_REL {
     grid-area: OSC1_ENV_REL;
 }
-.OSC1_ENVREL {
-    grid-area: OSC1_ENVREL;
+.ENVREL {
+    grid-area: ENVREL;
 }
 .OSC2_ENV_ATK {
     grid-area: OSC2_ENV_ATK;
 }
-.OSC2_ENVATK {
+/* .OSC2_ENVATK {
     grid-area: OSC2_ENVATK;
-}
+} */
 .OSC2_ENV_DECAY {
     grid-area: OSC2_ENV_DECAY;
 }
@@ -371,22 +358,22 @@
 .OSC2_ENV_SUS {
     grid-area: OSC2_ENV_SUS;
 }
-.OSC2_ENVSUS {
+/* .OSC2_ENVSUS {
     grid-area: OSC2_ENVSUS;
-}
+} */
 .OSC2_ENV_REL {
     grid-area: OSC2_ENV_REL;
 }
-.OSC2_ENVREL {
+/* .OSC2_ENVREL {
     grid-area: OSC2_ENVREL;
-}
+} */
 .OSC3_ENV_ATK {
     grid-area: OSC3_ENV_ATK;
 }
 
-.OSC3_ENVATK {
+/* .OSC3_ENVATK {
     grid-area: OSC3_ENVATK;
-}
+} */
 
 .OSC3_ENV_DECAY {
     grid-area: OSC3_ENV_DECAY;
@@ -400,17 +387,16 @@
     grid-area: OSC3_ENV_SUS;
 }
 
-.OSC3_ENVSUS {
+/* .OSC3_ENVSUS {
     grid-area: OSC3_ENVSUS;
-}
+} */
 
 .OSC3_ENV_REL {
     grid-area: OSC3_ENV_REL;
 }
-
-.OSC3_ENVREL {
+/* .OSC3_ENVREL {
     grid-area: OSC3_ENVREL;
-}
+} */
 
 
 /* 

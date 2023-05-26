@@ -29,11 +29,11 @@ export function FilterController({ type, oscFilterQ, OscFilterFrequency }) {
           value={qFltr}
           stepSize={1}
           min={0}
-          max={80}
+          max={20}
           showTooltip={true}
         />
       </div>
-      <div className={`${type}_FLTRQ`}>{type} Filter Quality</div>
+      <div className={`FLTRQ`}>Filter Q</div>
 
       <div className={`${type}_FREQ_FLTR`}>
         <CircleSlider
@@ -49,7 +49,7 @@ export function FilterController({ type, oscFilterQ, OscFilterFrequency }) {
           showTooltip={true}
         />
       </div>
-      <div className={`${type}_FLFREQ`}>{type} Filter Frequency</div>
+      <div className={`FLFREQ`}>Filter Frequency</div>
     </Fragment>
   );
 }
