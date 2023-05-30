@@ -69,16 +69,19 @@ function App() {
         ...prevEnvelope,
         ...values,
       }));
+      oscOne.envelope.set(values);
     } else if (type === "OSC2") {
       setOscTwoEnvelope((prevEnvelope) => ({
         ...prevEnvelope,
         ...values,
       }));
+      oscTwo.envelope.set(values);
     } else if (type === "OSC3") {
       setOscThreeEnvelope((prevEnvelope) => ({
         ...prevEnvelope,
         ...values,
       }));
+      oscThree.envelope.set(values);
     }
   };
 
@@ -97,6 +100,7 @@ function App() {
 
   return (
     <div className="container">
+      <div className="casediv">
       <div className="OSCIS">
         <Oscillator type={"OSC1"} synthVolume={oscOneVolume} synth={oscOne} />
         <Oscillator type={"OSC2"} synthVolume={oscTwoVolume} synth={oscTwo} />
@@ -160,14 +164,17 @@ function App() {
           updateEnvelope={updateEnvelope}
         />
       </div>
-
+    <div className="keybedCase">
       <Piano
+        className="piano"
         noteRange={{ first: firstNote, last: lastNote }}
         playNote={playNote}
         stopNote={stopNote}
         width={1000}
         keyboardShortcuts={keyboardShortcuts}
       />
+      </div>
+    </div>
     </div>
   );
 }

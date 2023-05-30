@@ -2,13 +2,95 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
-    gap: 0px 5px;
-    grid-auto-flow: row;
+    gap: 0px 0px;
+    align-items: center;
     grid-template-areas:
         "OSCIS"
         "PIANO";
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
+    flex: 1;
+}
+.OSCIS {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);/* Updated */
+    grid-template-rows: 0.5fr 1fr 1fr 1fr 0.5fr;
+    gap: 0px 0px;
+    min-height: 0;  /* NEW */
+    min-width: 0;   /* NEW; needed for Firefox */
+    grid-auto-flow: row;
+    grid-template-areas:
+        "DIGI VOLW FREQW FLTRQ FLFREQ ENVATK ENVDEC ENVSUS ENVREL AMW AMWF"
+        "OSC1 OSC1_VOL OSC1_FREQ OSC1_Q_FLTR OSC1_FREQ_FLTR OSC1_ENV_ATK OSC1_ENV_DECAY OSC1_ENV_SUS OSC1_ENV_REL OSC1_LFO_FREQ OSC1_LFOF_FREQ"
+        "OSC2 OSC2_VOL OSC2_FREQ OSC2_Q_FLTR OSC2_FREQ_FLTR OSC2_ENV_ATK OSC2_ENV_DECAY OSC2_ENV_SUS OSC2_ENV_REL OSC2_LFO_FREQ OSC2_LFOF_FREQ"
+        "OSC3 OSC3_VOL OSC3_FREQ OSC3_Q_FLTR OSC3_FREQ_FLTR OSC3_ENV_ATK OSC3_ENV_DECAY OSC3_ENV_SUS OSC3_ENV_REL OSC3_LFO_FREQ OSC3_LFOF_FREQ"
+        "OSCTITLE OSCTITLE2 OSCTITLE4 FLTITLE OSCTITLE5 ENVTITLE OSCTITLE6 OSCTITLE7 OSCTITLE8 LFOTITLE OSCTITLE9";
+    grid-area: OSCIS;
+    background-color: transparent;
+    transform: scale(0.8, 0.8);
+    border-radius: 10px;
+    border: 40px ridge #595959;
+    margin: 4px;
+    padding: 20px;
+    text-align: center;
+    justify-self: center;
+    background-color: bisque;
+    box-shadow: 3px 3px 3px rgba(29, 28, 28, 0.445);
+}
+/* .keybedCase {
+    border: 10px ridge #7a2f2e;
+    border-left: -25px
+} */
+.LFOTITLE {
+    grid-area: LFOTITLE;
+    font-size: 43pt;
+    align-items: start;
+}
+.FLTITLE {
+    grid-area: FLTITLE;
+    font-size: 43pt;
+}
+.ENVTITLE {
+    grid-area: ENVTITLE;
+    font-size: 43pt;
+    position: relative;
+    justify-self: start;
+    grid-auto-flow: row;
+}
+.OSCTITLE {
+    grid-area: OSCTITLE;
+    font-size: 43pt;
+}
+.OSCTITLE2 {
+    grid-area: OSCTITLE2;
+}
+.OSCTITLE3 {
+    grid-area: OSCTITLE3;
+}
+.OSCTITLE4 {
+    grid-area: OSCTITLE4;
+}
+.OSCTITLE5 {
+    grid-area: OSCTITLE5;
+}
+.OSCTITLE6 {
+    grid-area: OSCTITLE6;
+}
+.OSCTITLE7 {
+    grid-area: OSCTITLE7;
+}
+.OSCTITLE8 {
+    grid-area: OSCTITLE8;
+}
+.OSCTITLE9 {
+    grid-area: OSCTITLE9
+}
+.casediv {
+    padding-bottom: 25px ;
+    margin-right: -20px;
+    border: 4px solid black;
+    background-color: azure;
+    box-shadow: 3px 3px 3px 3px #7a2f2e;
 }
 /* 
 .OSCIS > div {
@@ -16,6 +98,7 @@
     align-items: center;
     justify-content: center;
 } */
+
 .FILTER > div {
     display: flex;
     align-items: center;
@@ -31,7 +114,10 @@
     align-items: center;
     justify-content: center;
 }
-
+.piano {
+    grid-area: PIANO;
+    box-shadow: 3px 3px 3px rgba(29, 28, 28, 0.445)
+}
 .OSC1_Q_FLTR {
     grid-area: OSC1_Q_FLTR;
 }
@@ -73,6 +159,13 @@
 
 .osc1 {
     grid-area: OSC1;
+}
+
+.DIGI {
+    grid-area: DIGI;
+    font-weight: bold;
+    font-size: 24pt;
+    align-items: center;
 }
 
 .OSC2 {
@@ -204,27 +297,7 @@
     align-items: center;
     justify-content: center;
 }
-.OSCIS {
-    display: grid;
-    /* grid-template-columns: .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr; */
-    grid-template-columns: repeat(11, minmax(0, 1fr));
-    grid-template-rows: .15fr 1.25fr 1fr 1fr;
-    gap: 0px 0px;
-    /* grid-auto-flow: row; */
-    grid-template-areas:
-        ". VOLW FREQW FLTRQ FLFREQ ENVATK ENVDEC ENVSUS ENVREL AMW AMWF"
-        "OSC1 OSC1_VOL OSC1_FREQ OSC1_Q_FLTR OSC1_FREQ_FLTR OSC1_ENV_ATK OSC1_ENV_DECAY OSC1_ENV_SUS OSC1_ENV_REL OSC1_LFO_FREQ OSC1_LFOF_FREQ"
-        "OSC2 OSC2_VOL OSC2_FREQ OSC2_Q_FLTR OSC2_FREQ_FLTR OSC2_ENV_ATK OSC2_ENV_DECAY OSC2_ENV_SUS OSC2_ENV_REL OSC2_LFO_FREQ OSC2_LFOF_FREQ"
-        "OSC3 OSC3_VOL OSC3_FREQ OSC3_Q_FLTR OSC3_FREQ_FLTR OSC3_ENV_ATK OSC3_ENV_DECAY OSC3_ENV_SUS OSC3_ENV_REL OSC3_LFO_FREQ OSC3_LFOF_FREQ";
-    grid-area: OSCIS;
-    background-color: transparent;
-    transform: scale(0.8, 0.8);
-    border-radius: 10px;
-    border: 1px ridge #333;
-    margin: 4px;
-    padding: 5px;
-    text-align: center;
-}
+
 .FILTER > div > button {
     height: 100%;
     width: 100%;
@@ -240,7 +313,7 @@
 }
 
 .OSCIS > div > button {
-    height: 50%;
+    height: 100%;
     width: 100%;
     background-color: transparent;
     background-color: rgba(113, 197, 131, 0.2);

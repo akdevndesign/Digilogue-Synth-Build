@@ -13,31 +13,43 @@ export function EnvelopeController({
   const [enDecay, setEnDecay] = useState(envDecay);
   const [enSustain, setEnSustain] = useState(envSustain);
   const [enRelease, setEnRelease] = useState(envRelease);
-
+  
   const changeAttack = (value) => {
     setEnAttack(value);
     updateEnvelope(type, {
       attack: value,
+      decay: enDecay,
+      sustain: enSustain,
+      release: enRelease,
     });
   };
-
+  
   const changeDecay = (value) => {
     setEnDecay(value);
     updateEnvelope(type, {
+      attack: enAttack,
       decay: value,
+      sustain: enSustain,
+      release: enRelease,
     });
   };
-
+  
   const changeSustain = (value) => {
     setEnSustain(value);
     updateEnvelope(type, {
+      attack: enAttack,
+      decay: enDecay,
       sustain: value,
+      release: enRelease,
     });
   };
-
+  
   const changeRelease = (value) => {
     setEnRelease(value);
     updateEnvelope(type, {
+      attack: enAttack,
+      decay: enDecay,
+      sustain: enSustain,
       release: value,
     });
   };
@@ -108,6 +120,7 @@ export function EnvelopeController({
         />
       </div>
       <div className={`ENVREL`}>Release</div>
+      <div className={`ENVTITLE`}>ENVELOPE</div>
     </Fragment>
   );
 }

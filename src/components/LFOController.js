@@ -37,6 +37,7 @@ export function LFOController({ type, sineVibrato, sineTremolo }) {
           knobRadius={7}
           progressWidth={10}
           circleWidth={9}
+          stepSize={0.1}
           onChange={changeAM}
           value={freqAM}
           min={0}
@@ -54,6 +55,7 @@ export function LFOController({ type, sineVibrato, sineTremolo }) {
           progressWidth={10}
           circleWidth={9}
           onChange={changeFM}
+          stepSize={0.1}
           min={0}
           max={100}
           value={freqFM}
@@ -61,6 +63,7 @@ export function LFOController({ type, sineVibrato, sineTremolo }) {
         />
       </div>
       <div className={`AMWF`}>FREQ LFO</div>
+      <div className={`LFOTITLE`}>LFO</div>
     </Fragment>
   );
 }

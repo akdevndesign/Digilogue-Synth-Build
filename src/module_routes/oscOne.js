@@ -37,7 +37,7 @@ export const oscOne = new Tone.MonoSynth({
   },
   envelope: {
     attack: 0.6,
-    decay: 0.0,
+    decay: 1.0,
     sustain: 1,
     release: 0.1,
   },

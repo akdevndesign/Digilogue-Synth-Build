@@ -41,6 +41,7 @@ export function FilterController({ type, oscFilterQ, OscFilterFrequency }) {
           knobRadius={7}
           progressWidth={1}
           circleWidth={10}
+          knobColor="#005a58"
           stepSize={20}
           onChange={changeFrequency}
           min={0}
@@ -50,6 +51,7 @@ export function FilterController({ type, oscFilterQ, OscFilterFrequency }) {
         />
       </div>
       <div className={`FLFREQ`}>Filter Frequency</div>
+      <div className={`FLTITLE`}>FILTER</div>
     </Fragment>
   );
 }

@@ -51,25 +51,18 @@ export function Oscillator({ type, synth, synthVolume }) {
   // A function to handle playing and stopping the oscillator
   const handlePlay = () => {
     if (!playingSynth.current) {
-      synth.triggerAttack(synth.frequency.value);
       playingSynth.current = true;
+      synth.mute = false;
       setStatus(true);
     } else {
-      const now = Tone.now();
-      synth.triggerRelease(now);
       playingSynth.current = false;
+      synth.mute = true;
       setStatus(false);
     }
-
-    // Set volume to zero and change status to "OFF"
-    if (status) {
-      synthVolume.volume.linearRampTo(-Infinity, 0.1, Tone.now());
-      setStatus(false);
-    }
-
-    // Mute oscillator
-    synth.mute = true;
   };
+  // // Set volume to zero and change status to "OFF"
+  // if (status) {
+  //   synthVolume.volume.linearRampTo(-Infinity, 0.1, Tone.now());
 
   // Return the JSX for the oscillator component
   return (
@@ -93,9 +86,7 @@ export function Oscillator({ type, synth, synthVolume }) {
         />
       </div>
       <div className={`VOLW`}>VOLUME</div>
-
-      {type === "NOISE" || (
-        <Fragment>
+      <div className={`DIGI`}>DIGILOGUE</div>
           <div className={`${type}_FREQ`}>
             <CircleSlider
               onChange={handleChangeFreq}
@@ -111,8 +102,7 @@ export function Oscillator({ type, synth, synthVolume }) {
             />
           </div>
           <div className={`FREQW`}>FREQUENCY</div>
-        </Fragment>
-      )}
+          <div className={`OSCTITLE`}>OSCILLATORS</div>
     </Fragment>
   );
 }
