@@ -1,1 +1,3 @@
-Digilogue - React Synth
+Basic Synth
+
+https://jupaolivera.github.io/BasicSynth/
