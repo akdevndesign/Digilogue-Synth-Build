@@ -15,7 +15,6 @@ export function FilterController({ type, oscFilterQ, OscFilterFrequency }) {
     OscFilterFrequency.rampTo(value, 0.01);
     setFrequencyFltr(value);
   };
-  
 
   return (
     <Fragment>
@@ -30,10 +29,13 @@ export function FilterController({ type, oscFilterQ, OscFilterFrequency }) {
           stepSize={1}
           min={0}
           max={20}
-          showTooltip={true}
         />
       </div>
-      <div className={`FLTRQ`}>Filter Q</div>
+      <div className={`FLTRQ`}>
+        Filter
+        <br />
+        Quality
+      </div>
 
       <div className={`${type}_FREQ_FLTR`}>
         <CircleSlider
@@ -47,7 +49,6 @@ export function FilterController({ type, oscFilterQ, OscFilterFrequency }) {
           min={0}
           max={1500}
           value={frequencyFltr}
-          showTooltip={true}
         />
       </div>
       <div className={`FLFREQ`}>Filter Frequency</div>

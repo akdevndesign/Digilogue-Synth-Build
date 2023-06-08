@@ -13,47 +13,30 @@ export function EnvelopeController({
   const [enDecay, setEnDecay] = useState(envDecay);
   const [enSustain, setEnSustain] = useState(envSustain);
   const [enRelease, setEnRelease] = useState(envRelease);
-  
+
   const changeAttack = (value) => {
-    setEnAttack(value);
     updateEnvelope(type, {
       attack: value,
-      decay: enDecay,
-      sustain: enSustain,
-      release: enRelease,
-    });
-  };
-  
-  const changeDecay = (value) => {
-    setEnDecay(value);
-    updateEnvelope(type, {
-      attack: enAttack,
-      decay: value,
-      sustain: enSustain,
-      release: enRelease,
-    });
-  };
-  
-  const changeSustain = (value) => {
-    setEnSustain(value);
-    updateEnvelope(type, {
-      attack: enAttack,
-      decay: enDecay,
-      sustain: value,
-      release: enRelease,
-    });
-  };
-  
-  const changeRelease = (value) => {
-    setEnRelease(value);
-    updateEnvelope(type, {
-      attack: enAttack,
-      decay: enDecay,
-      sustain: enSustain,
-      release: value,
     });
   };
 
+  const changeDecay = (value) => {
+    updateEnvelope(type, {
+      decay: value,
+    });
+  };
+
+  const changeSustain = (value) => {
+    updateEnvelope(type, {
+      sustain: value,
+    });
+  };
+
+  const changeRelease = (value) => {
+    updateEnvelope(type, {
+      release: value,
+    });
+  };
 
   return (
     <Fragment>
@@ -68,7 +51,6 @@ export function EnvelopeController({
           stepSize={0.5}
           min={0}
           max={5}
-          showTooltip={true}
         />
       </div>
       <div className={`ENVATK`}>Attack</div>
@@ -84,7 +66,6 @@ export function EnvelopeController({
           min={0}
           max={5}
           value={enDecay}
-          showTooltip={true}
         />
       </div>
       <div className={`ENVDEC`}>Decay</div>
@@ -100,7 +81,6 @@ export function EnvelopeController({
           min={0}
           max={1}
           value={enSustain}
-          showTooltip={true}
         />
       </div>
       <div className={`ENVSUS`}>Sustain</div>
@@ -111,12 +91,11 @@ export function EnvelopeController({
           knobRadius={7}
           progressWidth={1}
           circleWidth={10}
-          stepSize={0.5}
+          stepSize={0.1}
           onChange={changeRelease}
           min={0}
           max={5}
           value={enRelease}
-          showTooltip={true}
         />
       </div>
       <div className={`ENVREL`}>Release</div>

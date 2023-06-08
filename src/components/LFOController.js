@@ -17,16 +17,16 @@ export function LFOController({ type, sineVibrato, sineTremolo }) {
   };
   useEffect(() => {
     // Start the LFO when the component mounts
-      sineTremolo.start();
-      sineTremolo.wet.linearRampTo(1, 0.1, Tone.now());
-      sineVibrato.wet.linearRampTo(1, 0.1, Tone.now());
-      sineTremolo.depth.linearRampTo(1, 0.1, Tone.now());
-      sineVibrato.depth.linearRampTo(1, 0.1, Tone.now());
+    sineTremolo.start();
+    sineTremolo.wet.linearRampTo(1, 0.1, Tone.now());
+    sineVibrato.wet.linearRampTo(1, 0.1, Tone.now());
+    sineTremolo.depth.linearRampTo(1, 0.1, Tone.now());
+    sineVibrato.depth.linearRampTo(1, 0.1, Tone.now());
 
     // Clean up the LFO when the component unmounts
     return () => {
-        sineTremolo.stop();
-      }
+      sineTremolo.stop();
+    };
   }, []);
 
   return (
@@ -42,12 +42,14 @@ export function LFOController({ type, sineVibrato, sineTremolo }) {
           value={freqAM}
           min={0}
           max={100}
-          showTooltip={true}
         />
       </div>
-      <div className={`AMW`}>AMP LFO</div>
+      <div className={`AMW`}>
+        AMP
+        <br />
+        LFO
+      </div>
 
-      
       <div className={`${type}_LFOF_FREQ`}>
         <CircleSlider
           size={90}
@@ -59,10 +61,13 @@ export function LFOController({ type, sineVibrato, sineTremolo }) {
           min={0}
           max={100}
           value={freqFM}
-          showTooltip={true}
         />
       </div>
-      <div className={`AMWF`}>FREQ LFO</div>
+      <div className={`AMWF`}>
+        FREQ
+        <br />
+        LFO
+      </div>
       <div className={`LFOTITLE`}>LFO</div>
     </Fragment>
   );

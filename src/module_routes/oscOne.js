@@ -1,18 +1,26 @@
 import * as Tone from "tone";
 
-export const oscOneVolume = new Tone.Volume(-30).toDestination();
+export const oscOneVolume = new Tone.Volume(-10).toDestination();
 
-// export const oscOneDelay = new Tone.Delay({
-//   delayTime: 150,
-//   maxDelay: 160,
-//   wet: 50,
-// }).connect(oscOneVolume);
+export const oscOneReverb = new Tone.Freeverb({
+  roomSize: 0,
+  wet: .5,
+ 
+}).connect(oscOneVolume);
+
+console.log("oscOneReverb: ", oscOneReverb.decay)
+export const oscOneDelay = new Tone.PingPongDelay({
+  delayTime: 0,
+  maxDelay: 1,
+  feedback: .35,
+  wet: .0,
+}).connect(oscOneReverb);
 
 export const oscOneTremolo = new Tone.Tremolo({
   frequency: 0,
   depth: 1,
   spread: 10,
-}).connect(oscOneVolume);
+}).connect(oscOneDelay);
 
 export const oscOneVibrato = new Tone.Vibrato({
   frequency: 0,
@@ -32,13 +40,13 @@ export const oscOne = new Tone.MonoSynth({
   volume: -8,
   mute: false,
   oscillator: {
-    type: "sine6",
-    frequency: 150,
+    type: "triangle",
+    frequency: 50,
   },
   envelope: {
-    attack: 0.6,
+    attack: 0,
     decay: 1.0,
-    sustain: 1,
+    sustain: 0,
     release: 0.1,
   },
 

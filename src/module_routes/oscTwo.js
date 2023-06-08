@@ -1,12 +1,24 @@
 import * as Tone from "tone";
 
-export const oscTwoVolume = new Tone.Volume(-30).toDestination();
+export const oscTwoVolume = new Tone.Volume(-10).toDestination();
+
+export const oscTwoReverb = new Tone.Freeverb({
+  roomSize: 0,
+  wet: 0,
+}).connect(oscTwoVolume);
+
+export const oscTwoDelay = new Tone.PingPongDelay({
+  delayTime: 0,
+  maxDelay: 25,
+  feedback: .35,
+  wet: 0,
+}).connect(oscTwoReverb);
 
 export const oscTwoTremolo = new Tone.Tremolo({
   frequency: 0,
   depth: 1,
   spread: 0,
-}).connect(oscTwoVolume);
+}).connect(oscTwoDelay);
 
 export const oscTwoVibrato = new Tone.Vibrato({
   frequency: 0,
@@ -26,13 +38,13 @@ export const oscTwo = new Tone.MonoSynth({
   volume: -8,
   mute: false,
   oscillator: {
-    type: "sine6",
-    frequency: 150,
+    type: "square",
+    frequency: 50,
   },
   envelope: {
-    attack: 0.6,
-    decay: 0.0,
-    sustain: 1,
+    attack: 0,
+    decay: 1.0,
+    sustain: 0,
     release: 0.1,
   },
 }).connect(oscTwoResFilter);

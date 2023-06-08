@@ -1,12 +1,14 @@
 import "./css/App.css";
 import "./css/Piano.css";
-import React, {useState} from "react";
+import React, { useRef, Fragment, useState } from "react";
 import * as Tone from "tone";
 import {
   oscTwoVolume,
   oscTwoTremolo,
   oscTwoVibrato,
   oscTwoResFilter,
+  oscTwoDelay,
+  oscTwoReverb,
   oscTwo,
 } from "./module_routes/oscTwo";
 import {
@@ -14,6 +16,8 @@ import {
   oscOneTremolo,
   oscOneVibrato,
   oscOneResFilter,
+  oscOneDelay,
+  oscOneReverb,
   oscOne,
 } from "./module_routes/oscOne";
 
@@ -22,6 +26,8 @@ import {
   oscThreeTremolo,
   oscThreeVibrato,
   oscThreeResFilter,
+  oscThreeDelay,
+  oscThreeReverb,
   oscThree,
 } from "./module_routes/oscThree";
 
@@ -29,13 +35,14 @@ import { Oscillator } from "./components/OscillatorController";
 import { LFOController } from "./components/LFOController";
 import { FilterController } from "./components/FilterController";
 import { EnvelopeController } from "./components/EnvelopeController";
+import { EffectsController } from "./components/EffectsController";
 import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
 import "react-piano/dist/styles.css";
 
 function App() {
-  const ACTX = Tone.context; //setting up Tone.js + Web Audio API
   const firstNote = MidiNumbers.fromNote("c3");
   const lastNote = MidiNumbers.fromNote("b4");
+
   const keyboardShortcuts = KeyboardShortcuts.create({
     firstNote: firstNote,
     lastNote: lastNote,
@@ -63,32 +70,65 @@ function App() {
     release: 0.1,
   });
 
+  const [oscillatorType, setOscillatorType] = useState("triangle");
+
   const updateEnvelope = (type, values) => {
     if (type === "OSC1") {
       setOscOneEnvelope((prevEnvelope) => ({
         ...prevEnvelope,
         ...values,
       }));
-      oscOne.envelope.set(values);
+      oscOne.envelope.set(values); // Update oscillator envelope settings
     } else if (type === "OSC2") {
       setOscTwoEnvelope((prevEnvelope) => ({
         ...prevEnvelope,
         ...values,
       }));
-      oscTwo.envelope.set(values);
+      oscTwo.envelope.set(values); // Update oscillator envelope settings
     } else if (type === "OSC3") {
       setOscThreeEnvelope((prevEnvelope) => ({
         ...prevEnvelope,
         ...values,
       }));
-      oscThree.envelope.set(values);
+      oscThree.envelope.set(values); // Update oscillator envelope settings
     }
   };
 
+
+  const [oscillatorFrequencies, setOscillatorFrequencies] = useState({
+    OSC1: 50, // Default frequency for OSC1
+    OSC2: 50, // Default frequency for OSC2
+    OSC3: 50, // Default frequency for OSC3
+  });
+
+  const updateFrequency = (type, frequency) => {
+    setOscillatorFrequencies((prevFrequencies) => ({
+      ...prevFrequencies,
+      [type]: frequency,
+    }));
+  };
+
+  const handleOscillatorChange = (type, oscillatorType) => {
+    if (type === "OSC1") {
+      oscOne.oscillator.type = oscillatorType;
+    } else if (type === "OSC2") {
+      oscTwo.oscillator.type = oscillatorType;
+    } else if (type === "OSC3") {
+      oscThree.oscillator.type = oscillatorType;
+    }
+    setOscillatorType(oscillatorType);
+  };
+
   const playNote = (midiNumber) => {
-    oscOne.triggerAttack(Tone.Midi(midiNumber).toFrequency());
-    oscTwo.triggerAttack(Tone.Midi(midiNumber).toFrequency());
-    oscThree.triggerAttack(Tone.Midi(midiNumber).toFrequency());
+    oscOne.triggerAttack(
+      Tone.Midi(midiNumber).toFrequency() * (oscillatorFrequencies.OSC1 / 50)
+    );
+    oscTwo.triggerAttack(
+      Tone.Midi(midiNumber).toFrequency() * (oscillatorFrequencies.OSC2 / 50)
+    );
+    oscThree.triggerAttack(
+      Tone.Midi(midiNumber).toFrequency() * (oscillatorFrequencies.OSC3 / 50)
+    );
   };
 
   // Function to stop playing a note
@@ -101,82 +141,133 @@ function App() {
   return (
     <div className="container">
       <div className="casediv">
-      <div className="OSCIS">
-        <Oscillator type={"OSC1"} synthVolume={oscOneVolume} synth={oscOne} />
-        <Oscillator type={"OSC2"} synthVolume={oscTwoVolume} synth={oscTwo} />
-        <Oscillator
-          type={"OSC3"}
-          synthVolume={oscThreeVolume}
-          synth={oscThree}
-        />
-        <FilterController
-          type={"OSC1"}
-          oscFilterQ={oscOneResFilter.Q}
-          OscFilterFrequency={oscOneResFilter.frequency}
-        />
-        <FilterController
-          type={"OSC2"}
-          oscFilterQ={oscTwoResFilter.Q}
-          OscFilterFrequency={oscTwoResFilter.frequency}
-        />
-        <FilterController
-          type={"OSC3"}
-          oscFilterQ={oscThreeResFilter.Q}
-          OscFilterFrequency={oscThreeResFilter.frequency}
-        />
-        <LFOController
-          type={"OSC2"}
-          sineTremolo={oscTwoTremolo}
-          sineVibrato={oscTwoVibrato}
-        />
-        <LFOController
-          type={"OSC1"}
-          sineTremolo={oscOneTremolo}
-          sineVibrato={oscOneVibrato}
-        />
-        <LFOController
-          type={"OSC3"}
-          sineTremolo={oscThreeTremolo}
-          sineVibrato={oscThreeVibrato}
-        />
-        <EnvelopeController
-          type={"OSC1"}
-          envAttack={oscOneEnvelope.attack}
-          envDecay={oscOneEnvelope.decay}
-          envSustain={oscOneEnvelope.sustain}
-          envRelease={oscOneEnvelope.release}
-          updateEnvelope={updateEnvelope}
-        />
-        <EnvelopeController
-          type={"OSC2"}
-          envAttack={oscTwoEnvelope.attack}
-          envDecay={oscTwoEnvelope.decay}
-          envSustain={oscTwoEnvelope.sustain}
-          envRelease={oscTwoEnvelope.release}
-          updateEnvelope={updateEnvelope}
-        />
-        <EnvelopeController
-          type={"OSC3"}
-          envAttack={oscThreeEnvelope.attack}
-          envDecay={oscThreeEnvelope.decay}
-          envSustain={oscThreeEnvelope.sustain}
-          envRelease={oscThreeEnvelope.release}
-          updateEnvelope={updateEnvelope}
+        <div className="OSCIS">
+          <div className="oscSection">
+            <Oscillator
+              type={"OSC1"}
+              synthVolume={oscOneVolume}
+              synth={oscOne}
+              oscillatorType={oscillatorType}
+              handleOscillatorChange={handleOscillatorChange}
+              updateFrequency={updateFrequency}
+            />
+            <Oscillator
+              type={"OSC2"}
+              synthVolume={oscTwoVolume}
+              synth={oscTwo}
+              oscillatorType={oscillatorType}
+              handleOscillatorChange={handleOscillatorChange}
+              updateFrequency={updateFrequency}
+            />
+            <Oscillator
+              type={"OSC3"}
+              synthVolume={oscThreeVolume}
+              synth={oscThree}
+              oscillatorType={oscillatorType}
+              handleOscillatorChange={handleOscillatorChange}
+              updateFrequency={updateFrequency}
+            />
+          </div>
+          <div className="filterSection">
+            <FilterController
+              type={"OSC1"}
+              oscFilterQ={oscOneResFilter.Q}
+              OscFilterFrequency={oscOneResFilter.frequency}
+            />
+            <FilterController
+              type={"OSC2"}
+              oscFilterQ={oscTwoResFilter.Q}
+              OscFilterFrequency={oscTwoResFilter.frequency}
+            />
+            <FilterController
+              type={"OSC3"}
+              oscFilterQ={oscThreeResFilter.Q}
+              OscFilterFrequency={oscThreeResFilter.frequency}
+            />
+          </div>
+          <div className="envSection">
+            <EnvelopeController
+              type={"OSC1"}
+              envAttack={oscOneEnvelope.attack}
+              envDecay={oscOneEnvelope.decay}
+              envSustain={oscOneEnvelope.sustain}
+              envRelease={oscOneEnvelope.release}
+              updateEnvelope={updateEnvelope}
+            />
+            <EnvelopeController
+              type={"OSC2"}
+              envAttack={oscTwoEnvelope.attack}
+              envDecay={oscTwoEnvelope.decay}
+              envSustain={oscTwoEnvelope.sustain}
+              envRelease={oscTwoEnvelope.release}
+              updateEnvelope={updateEnvelope}
+            />
+            <EnvelopeController
+              type={"OSC3"}
+              envAttack={oscThreeEnvelope.attack}
+              envDecay={oscThreeEnvelope.decay}
+              envSustain={oscThreeEnvelope.sustain}
+              envRelease={oscThreeEnvelope.release}
+              updateEnvelope={updateEnvelope}
+            />
+          </div>
+          <div className="lfoSection">
+            <LFOController
+              type={"OSC1"}
+              sineTremolo={oscTwoTremolo}
+              sineVibrato={oscTwoVibrato}
+            />
+            <LFOController
+              type={"OSC2"}
+              sineTremolo={oscOneTremolo}
+              sineVibrato={oscOneVibrato}
+            />
+            <LFOController
+              type={"OSC3"}
+              sineTremolo={oscThreeTremolo}
+              sineVibrato={oscThreeVibrato}
+            />
+          </div>
+          <div className="efxSection">
+            <EffectsController
+              type={"OSC1"}
+              oscDelayWet={oscOneDelay.wet}
+              oscDelayTime={oscOneDelay.delayTime}
+              oscDelayFbk={oscOneDelay.feedback}
+              reverbWet={oscOneReverb.wet}
+              reverbDecay={oscOneReverb.roomSize}
+            />
+            <EffectsController
+              type={"OSC2"}
+              oscDelayWet={oscTwoDelay.wet}
+              oscDelayTime={oscTwoDelay.delayTime}
+              oscDelayFbk={oscTwoDelay.feedback}
+              reverbWet={oscTwoReverb.wet}
+              reverbDecay={oscTwoReverb.roomSize}
+            />
+            <EffectsController
+              type={"OSC3"}
+              oscDelayWet={oscThreeDelay.wet}
+              oscDelayTime={oscThreeDelay.delayTime}
+              oscDelayFbk={oscThreeDelay.feedback}
+              reverbWet={oscThreeReverb.wet}
+              reverbDecay={oscThreeReverb.roomSize}
+
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="keybedCase">
+        <Piano
+          className="piano"
+          noteRange={{ first: firstNote, last: lastNote }}
+          playNote={playNote}
+          stopNote={stopNote}
+          keyboardShortcuts={keyboardShortcuts}
         />
       </div>
-    <div className="keybedCase">
-      <Piano
-        className="piano"
-        noteRange={{ first: firstNote, last: lastNote }}
-        playNote={playNote}
-        stopNote={stopNote}
-        width={1000}
-        keyboardShortcuts={keyboardShortcuts}
-      />
-      </div>
-    </div>
     </div>
   );
 }
-
 export default App;

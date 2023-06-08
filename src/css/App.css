@@ -1,4 +1,11 @@
+.app { 
+    background-color: #595959;
+}
+
 .container {
+    background-image: url("https://res.cloudinary.com/dusaigbyn/image/upload/v1686177549/pexels-fwstudio-172296_pvos6a.jpg");
+    background-size: cover;
+    background-position: center;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
@@ -12,19 +19,16 @@
     flex: 1;
 }
 .OSCIS {
+    
     display: grid;
-    grid-template-columns: repeat(11, 1fr);/* Updated */
-    grid-template-rows: 0.5fr 1fr 1fr 1fr 0.5fr;
+    grid-template-columns: 400px 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
     gap: 0px 0px;
-    min-height: 0;  /* NEW */
-    min-width: 0;   /* NEW; needed for Firefox */
-    grid-auto-flow: row;
+    min-height: 0;
+    min-width: 0;
+    grid-auto-flow: column;
     grid-template-areas:
-        "DIGI VOLW FREQW FLTRQ FLFREQ ENVATK ENVDEC ENVSUS ENVREL AMW AMWF"
-        "OSC1 OSC1_VOL OSC1_FREQ OSC1_Q_FLTR OSC1_FREQ_FLTR OSC1_ENV_ATK OSC1_ENV_DECAY OSC1_ENV_SUS OSC1_ENV_REL OSC1_LFO_FREQ OSC1_LFOF_FREQ"
-        "OSC2 OSC2_VOL OSC2_FREQ OSC2_Q_FLTR OSC2_FREQ_FLTR OSC2_ENV_ATK OSC2_ENV_DECAY OSC2_ENV_SUS OSC2_ENV_REL OSC2_LFO_FREQ OSC2_LFOF_FREQ"
-        "OSC3 OSC3_VOL OSC3_FREQ OSC3_Q_FLTR OSC3_FREQ_FLTR OSC3_ENV_ATK OSC3_ENV_DECAY OSC3_ENV_SUS OSC3_ENV_REL OSC3_LFO_FREQ OSC3_LFOF_FREQ"
-        "OSCTITLE OSCTITLE2 OSCTITLE4 FLTITLE OSCTITLE5 ENVTITLE OSCTITLE6 OSCTITLE7 OSCTITLE8 LFOTITLE OSCTITLE9";
+        "oscSection filterSection envSection lfoSection efxSection";
     grid-area: OSCIS;
     background-color: transparent;
     transform: scale(0.8, 0.8);
@@ -32,35 +36,164 @@
     border: 40px ridge #595959;
     margin: 4px;
     padding: 20px;
-    text-align: center;
     justify-self: center;
-    background-color: bisque;
+    background-color: rgb(187, 187, 187);
     box-shadow: 3px 3px 3px rgba(29, 28, 28, 0.445);
 }
-/* .keybedCase {
-    border: 10px ridge #7a2f2e;
-    border-left: -25px
-} */
+.oscSection {
+    grid-area: oscSection;
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr;
+    grid-template-rows: 0.5fr 1fr 1fr 1fr 0.5fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      "DIGI VOLW FREQW"
+      "OSC1 OSC1_VOL OSC1_FREQ"
+      "OSC2 OSC2_VOL OSC2_FREQ"
+      "OSC3 OSC3_VOL OSC3_FREQ"
+      "OSCTITLE . .";
+    background-color: transparent;
+    justify-self: center;
+    background-color: rgb(187, 187, 187);
+    overflow: auto;
+    border-right: 2px solid #595959;
+    padding-right: 7px;
+  }
+
+.filterSection{
+    grid-area: filterSection;
+    display: grid;
+    width: 185px;
+    grid-template-columns: 90px 85px;
+    grid-template-rows: 0.5fr 1fr 1fr 1fr 0.5fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "FLTRQ FLFREQ"
+        "OSC1_Q_FLTR OSC1_FREQ_FLTR"
+        "OSC2_Q_FLTR OSC2_FREQ_FLTR"
+        "OSC3_Q_FLTR OSC3_FREQ_FLTR"
+        "FLTITLE .";
+    background-color: transparent;
+    justify-self: center;
+    background-color: rgb(187, 187, 187);
+    overflow: auto;
+    border-right: 2px solid #595959;
+    margin-right: 20px;
+    padding-left: 7px;
+    text-align: center;
+}
+.envSection{
+    grid-area: envSection;
+    display: grid;
+    width: 345px;
+    grid-template-columns: 85px 85px 85px 85px;
+    grid-template-rows: 0.5fr 1fr 1fr 1fr 0.5fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "ENVATK ENVDEC ENVSUS ENVREL"
+        "OSC1_ENV_ATK OSC1_ENV_DECAY OSC1_ENV_SUS OSC1_ENV_REL"
+        "OSC2_ENV_ATK OSC2_ENV_DECAY OSC2_ENV_SUS OSC2_ENV_REL"
+        "OSC3_ENV_ATK OSC3_ENV_DECAY OSC3_ENV_SUS OSC3_ENV_REL"
+        "ENVTITLE . . .";
+        background-color: transparent;
+        justify-self: center;
+        background-color: rgb(187, 187, 187);
+        overflow: auto;
+        border-right: 2px solid #595959;
+        margin-right: 20px;;
+        padding-left: 7px;
+        text-align: center;
+}
+.lfoSection {
+    grid-area: lfoSection;
+        display: grid;
+        width: 175px;
+        grid-template-columns: 85px 85px;
+        grid-template-rows: 0.5fr 1fr 1fr 1fr 0.5fr;
+        gap: 0px 0px;
+        grid-auto-flow: row;
+        grid-template-areas:
+            "AMW AMWF"
+            "OSC1_LFO_FREQ OSC1_LFOF_FREQ"
+            "OSC2_LFO_FREQ OSC2_LFOF_FREQ"
+            "OSC3_LFO_FREQ OSC3_LFOF_FREQ"
+            "LFOTITLE .";
+            background-color: transparent;
+            justify-self: center;
+            background-color: rgb(187, 187, 187);
+            overflow: auto;
+            border-right: 2px solid #595959;
+            padding-right: 7px;
+            padding-left: 7px;
+            text-align: center;
+}
+.efxSection{
+    font-weight: bold;
+    grid-area: efxSection;
+    display: grid;
+    width: 435px;
+    grid-template-columns: 85px 85px 85px 85px 85px;
+    grid-template-rows: 0.5fr 1fr 1fr 1fr 0.5fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "DLYWET DLYFBK DLYTIME REVWET REVDEC"
+        "OSC1_DLY_WET OSC1_DLY_FBK OSC1_DLY_TIME OSC1_REV_WET OSC1_REV_DEC"
+        "OSC2_DLY_WET OSC2_DLY_FBK OSC2_DLY_TIME OSC2_REV_WET OSC2_REV_DEC"
+        "OSC3_DLY_WET OSC3_DLY_FBK OSC3_DLY_TIME OSC3_REV_WET OSC3_REV_DEC"
+        "EFXTITLE . . . .";
+        background-color: transparent;
+        border-radius: 10px;
+        justify-self: center;
+        background-color: rgb(187, 187, 187);
+        overflow: auto;
+        margin-right: 20px;
+        padding-left: 7px;
+        text-align: center;
+}
+
+.oscSwitch {
+width: 100px;
+}
 .LFOTITLE {
     grid-area: LFOTITLE;
     font-size: 43pt;
-    align-items: start;
+    text-align: left;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: visible; /* Enable horizontal scrolling for overflow */
 }
 .FLTITLE {
     grid-area: FLTITLE;
     font-size: 43pt;
+    text-align: left;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: visible; /* Enable horizontal scrolling for overflow */
 }
 .ENVTITLE {
     grid-area: ENVTITLE;
     font-size: 43pt;
-    position: relative;
-    justify-self: start;
-    grid-auto-flow: row;
+    text-align: left;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: visible; /* Enable horizontal scrolling for overflow */
 }
 .OSCTITLE {
     grid-area: OSCTITLE;
     font-size: 43pt;
-}
+    text-align: left;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: visible; /* Enable horizontal scrolling for overflow */
+  }
+
+.EFXTITLE {
+    grid-area: EFXTITLE;
+    font-size: 43pt;
+    text-align: left;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: visible; /* Enable horizontal scrolling for overflow */
+  }
+  
 .OSCTITLE2 {
     grid-area: OSCTITLE2;
 }
@@ -91,13 +224,10 @@
     border: 4px solid black;
     background-color: azure;
     box-shadow: 3px 3px 3px 3px #7a2f2e;
+    background-image: url("https://res.cloudinary.com/dusaigbyn/image/upload/v1686177549/pexels-fwstudio-172296_pvos6a.jpg");
+    background-size: cover;
+    background-position: center;
 }
-/* 
-.OSCIS > div {
-
-    align-items: center;
-    justify-content: center;
-} */
 
 .FILTER > div {
     display: flex;
@@ -116,7 +246,9 @@
 }
 .piano {
     grid-area: PIANO;
-    box-shadow: 3px 3px 3px rgba(29, 28, 28, 0.445)
+    box-shadow: 3px 3px 3px rgba(29, 28, 28, 0.445);
+    height: 100%;
+    width: 100%;
 }
 .OSC1_Q_FLTR {
     grid-area: OSC1_Q_FLTR;
@@ -129,6 +261,22 @@
 }
 .FLTRQ {
     grid-area: FLTRQ;
+    text-align: center;
+}
+.REVDEC {
+    grid-area: REVDEC;
+}
+.REVWET {
+    grid-area: REVWET;
+}
+.DLYTIME {
+    grid-area: DLYTIME;
+}
+.DLYFBK {
+    grid-area: DLYFBK;
+}
+.DLYWET {
+    grid-area: DLYWET;
 }
 .OSC2_FLTRQ {
     grid-area: OSC2_FLTRQ;
@@ -148,14 +296,6 @@
 .FLFREQ {
     grid-area: FLFREQ;
 }
-/* .OSC2_FLFREQ {
-    grid-area: OSC2_FLFREQ;
-}
-.OSC3_FLFREQ {
-    grid-area: OSC3_FLFREQ;
-}
- */
-
 
 .osc1 {
     grid-area: OSC1;
@@ -189,6 +329,7 @@
 }
 .VOLW {
     grid-area: VOLW;
+    text-align: center;
 }
 
 .FLDT {
@@ -200,14 +341,6 @@
 .FLRSN {
     grid-area: FLRSN
 }
-
-/* .OSC2_VOLW {
-    grid-area: OSC2_VOLW;
-} */
-
-/* .OSC3_VOLW {
-    grid-area: OSC3_VOLW;
-} */
 
 .OSC1_FREQ {
     grid-area: OSC1_FREQ;
@@ -232,66 +365,52 @@
 .OSC3_FREQW {
     grid-area: OSC3_FREQW;
 }
-/* 
-.ENVELOPE {
-    display: grid;
-    grid-template-columns: .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr;
-    grid-template-rows: 1.4fr 1.4fr 1.4fr;
-    gap: 0px;
-    grid-auto-flow: row;
-    grid-template-areas: 
-    OSC1_ENV_ATK OSC1_ENVATK OSC1_ENV_DECAY OSC1_ENVDEC OSC1_ENV_SUS OSC1_ENVSUS OSC1_ENV_REL OSC1_ENVREL
-    OSC2_ENV_ATK OSC2_ENVATK OSC2_ENV_DECAY OSC2_ENVDEC OSC2_ENV_SUS OSC2_ENVSUS OSC2_ENV_REL OSC2_ENVREL
-    OSC3_ENV_ATK OSC3_ENVATK OSC3_ENV_DECAY OSC3_ENVDEC OSC3_ENV_SUS OSC3_ENVSUS OSC3_ENV_REL OSC3_ENVREL
-    grid-area: ENVELOPE;
-    background-color: transparent;
-    transform: scale(0.8, 0.8);
-    border-radius: 10px;
-    border: 1px ridge #333;
-    margin: 4px;
-    padding: 5px;
-    text-align: center;
-} */
-/* 
-.LFO {
-    display: grid;
-    grid-template-columns: 1.4fr 1.4fr 1.4fr 1.4fr;
-    grid-template-rows: 1.4fr 1.4fr 1.4fr;
-    gap: 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-        "OSC1_LFO_FREQ OSC1_AMW OSC1_LFOF_FREQ OSC1_LFOF_FREQW"
-        "OSC2_LFO_FREQ OSC2_AMW OSC2_LFOF_FREQ OSC2_LFOF_FREQW"
-        "OSC3_LFO_FREQ OSC3_AMW OSC3_LFOF_FREQ OSC3_LFOF_FREQW";
-    grid-area: LFO;
-    background-color: transparent;
-    transform: scale(0.8, 0.8);
-    border-radius: 10px;
-    border: 1px ridge #333;
-    margin: 4px;
-    padding: 5px;
-    text-align: center;
-} */
-/* .FILTER {
-    display: grid;
-    grid-template-columns: .5fr .5fr .5fr .5fr;
-    grid-template-rows: 1.4fr 1.4fr 1.4fr;
-    gap: 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-    "OSC1_Q_FLTR OSC1_FLTRQ OSC1_FREQ_FLTR OSC1_FLFREQ"
-    "OSC2_Q_FLTR OSC2_FLTRQ OSC2_FREQ_FLTR OSC2_FLFREQ"
-    "OSC3_Q_FLTR OSC3_FLTRQ OSC3_FREQ_FLTR OSC3_FLFREQ";
-    grid-area: FILTER;
-    background-color: transparent;
-    transform: scale(0.8, 0.8);
-    border-radius: 10px;
-    border: 1px ridge #333;
-    margin: 4px;
-    padding: 5px;
-    text-align: center;
-} */
 
+.OSC1_DLY_WET { 
+    grid-area: OSC1_DLY_WET;
+}
+.OSC2_DLY_WET {
+    grid-area: OSC2_DLY_WET;
+}
+.OSC3_DLY_WET {
+    grid-area: OSC3_DLY_WET;
+}
+.OSC1_DLY_FBK {
+    grid-area: OSC1_DLY_FBK;
+}
+.OSC2_DLY_FBK {
+    grid-area: OSC2_DLY_FBK;
+}
+.OSC3_DLY_FBK {
+    grid-area: OSC3_DLY_FBK;
+}
+.OSC1_DLY_TIME {
+    grid-area: OSC1_DLY_TIME;
+}
+.OSC2_DLY_TIME {
+    grid-area: OSC2_DLY_TIME;
+}
+.OSC3_DLY_TIME {
+    grid-area: OSC3_DLY_TIME;
+}
+.OSC1_REV_WET {
+    grid-area: OSC1_REV_WET;
+}
+.OSC2_REV_WET {
+    grid-area: OSC2_REV_WET;
+}
+.OSC3_REV_WET {
+    grid-area: OSC3_REV_WET;
+}
+.OSC1_REV_DEC {
+    grid-area: OSC1_REV_DEC;
+}
+.OSC2_REV_DEC {
+    grid-area: OSC2_REV_DEC;
+}
+.OSC3_REV_DEC {
+    grid-area: OSC3_REV_DEC;
+}
 .LFO > div {
     display: flex;
     align-items: center;
@@ -355,10 +474,6 @@
 .AMW {
     grid-area: AMW;
 }
-/* 
-.OSC2_AMW {
-    grid-area: OSC2_AMW;
-} */
 
 .OSC3_LFOW {
     grid-area: OSC3_LFOW;
@@ -383,14 +498,6 @@
 .FREQW {
     grid-area: FREQW;
 }
-
-/* .OSC2_LFOF_FREQW {
-    grid-area: OSC2_LFOF_FREQW;
-}
-
-.OSC3_LFOF_FREQW {
-    grid-area: OSC3_LFOF_FREQW;
-} */
 
 .OSC1_ENV_ATK {
     grid-area: OSC1_ENV_ATK;
@@ -419,9 +526,7 @@
 .OSC2_ENV_ATK {
     grid-area: OSC2_ENV_ATK;
 }
-/* .OSC2_ENVATK {
-    grid-area: OSC2_ENVATK;
-} */
+
 .OSC2_ENV_DECAY {
     grid-area: OSC2_ENV_DECAY;
 }
@@ -431,22 +536,14 @@
 .OSC2_ENV_SUS {
     grid-area: OSC2_ENV_SUS;
 }
-/* .OSC2_ENVSUS {
-    grid-area: OSC2_ENVSUS;
-} */
+
 .OSC2_ENV_REL {
     grid-area: OSC2_ENV_REL;
 }
-/* .OSC2_ENVREL {
-    grid-area: OSC2_ENVREL;
-} */
+
 .OSC3_ENV_ATK {
     grid-area: OSC3_ENV_ATK;
 }
-
-/* .OSC3_ENVATK {
-    grid-area: OSC3_ENVATK;
-} */
 
 .OSC3_ENV_DECAY {
     grid-area: OSC3_ENV_DECAY;
@@ -460,36 +557,12 @@
     grid-area: OSC3_ENV_SUS;
 }
 
-/* .OSC3_ENVSUS {
-    grid-area: OSC3_ENVSUS;
-} */
-
 .OSC3_ENV_REL {
     grid-area: OSC3_ENV_REL;
 }
-/* .OSC3_ENVREL {
-    grid-area: OSC3_ENVREL;
-} */
 
 
-/* 
-.SPECTRO_ONE {
-    grid-area: SPECTRO_ONE;
-    background-color: transparent;
-    padding-top: 15px;
-    padding-bottom: 40px;
-    transform: scale(1, 0.9);
-}
-
-.SPECTRO_TWO {
-    grid-area: SPECTRO_TWO;
-    background-color: transparent;
-    padding-top: 15px;
-    padding-right: 15px;
-    transform: scale(1, 0.9);
-}
-
-.WAVEFORM {
+/* .WAVEFORM {
     grid-area: WAVEFORM;
     background-color: rgba(0, 0, 0, 0.05);
 } */
