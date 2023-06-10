@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Digilogue-Synth-Build/static/css/main.dd6a31ea.css",
+    "main.js": "/Digilogue-Synth-Build/static/js/main.c661753b.js",
+    "static/js/787.7535b579.chunk.js": "/Digilogue-Synth-Build/static/js/787.7535b579.chunk.js",
+    "index.html": "/Digilogue-Synth-Build/index.html",
+    "main.dd6a31ea.css.map": "/Digilogue-Synth-Build/static/css/main.dd6a31ea.css.map",
+    "main.c661753b.js.map": "/Digilogue-Synth-Build/static/js/main.c661753b.js.map",
+    "787.7535b579.chunk.js.map": "/Digilogue-Synth-Build/static/js/787.7535b579.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dd6a31ea.css",
+    "static/js/main.c661753b.js"
+  ]
+}
