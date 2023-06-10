@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import { CircleSlider } from "react-circle-slider";
 
 export function EnvelopeController({
@@ -6,13 +6,11 @@ export function EnvelopeController({
   envAttack,
   envDecay,
   envSustain,
-  envRelease,
   updateEnvelope,
 }) {
   const [enAttack, setEnAttack] = useState(envAttack);
   const [enDecay, setEnDecay] = useState(envDecay);
   const [enSustain, setEnSustain] = useState(envSustain);
-  const [enRelease, setEnRelease] = useState(envRelease);
 
   const changeAttack = (value) => {
     updateEnvelope(type, {
@@ -32,20 +30,17 @@ export function EnvelopeController({
     });
   };
 
-  const changeRelease = (value) => {
-    updateEnvelope(type, {
-      release: value,
-    });
-  };
-
   return (
     <Fragment>
       <div className={`${type}_ENV_ATK`}>
         <CircleSlider
           size={90}
+          gradientColorFrom="black"
+          knobColor="#ff5722"
+          gradientColorTo="gray"
+          progressWidth={11}
           knobRadius={7}
-          progressWidth={10}
-          circleWidth={9}
+          circleWidth={10}
           onChange={changeAttack}
           value={enAttack}
           stepSize={0.5}
@@ -58,8 +53,11 @@ export function EnvelopeController({
       <div className={`${type}_ENV_DECAY`}>
         <CircleSlider
           size={90}
+          gradientColorFrom="black"
+          knobColor="#ff5722"
+          gradientColorTo="gray"
+          progressWidth={11}
           knobRadius={7}
-          progressWidth={1}
           circleWidth={10}
           stepSize={0.5}
           onChange={changeDecay}
@@ -73,10 +71,13 @@ export function EnvelopeController({
       <div className={`${type}_ENV_SUS`}>
         <CircleSlider
           size={90}
+          gradientColorFrom="black"
+          knobColor="#ff5722"
+          gradientColorTo="gray"
+          progressWidth={11}
           knobRadius={7}
-          progressWidth={1}
           circleWidth={10}
-          stepSize={0.01}
+          stepSize={0.2}
           onChange={changeSustain}
           min={0}
           max={1}
@@ -84,21 +85,6 @@ export function EnvelopeController({
         />
       </div>
       <div className={`ENVSUS`}>Sustain</div>
-
-      <div className={`${type}_ENV_REL`}>
-        <CircleSlider
-          size={90}
-          knobRadius={7}
-          progressWidth={1}
-          circleWidth={10}
-          stepSize={0.1}
-          onChange={changeRelease}
-          min={0}
-          max={5}
-          value={enRelease}
-        />
-      </div>
-      <div className={`ENVREL`}>Release</div>
       <div className={`ENVTITLE`}>ENVELOPE</div>
     </Fragment>
   );

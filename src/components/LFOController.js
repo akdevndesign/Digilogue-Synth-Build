@@ -34,9 +34,12 @@ export function LFOController({ type, sineVibrato, sineTremolo }) {
       <div className={`${type}_LFO_FREQ`}>
         <CircleSlider
           size={90}
+          gradientColorFrom="black"
+          knobColor="#ff5722"
+          gradientColorTo="gray"
+          progressWidth={11}
           knobRadius={7}
-          progressWidth={10}
-          circleWidth={9}
+          circleWidth={10}
           stepSize={0.1}
           onChange={changeAM}
           value={freqAM}
@@ -53,9 +56,12 @@ export function LFOController({ type, sineVibrato, sineTremolo }) {
       <div className={`${type}_LFOF_FREQ`}>
         <CircleSlider
           size={90}
+          gradientColorFrom="black"
+          knobColor="#ff5722"
+          gradientColorTo="gray"
+          progressWidth={11}
           knobRadius={7}
-          progressWidth={10}
-          circleWidth={9}
+          circleWidth={10}
           onChange={changeFM}
           stepSize={0.1}
           min={0}

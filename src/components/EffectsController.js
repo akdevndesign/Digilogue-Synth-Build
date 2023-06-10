@@ -1,14 +1,12 @@
 import { Fragment, useState } from "react";
 import { CircleSlider } from "react-circle-slider";
-import { Knob, Pointer, Scale, Value } from "rc-knob";
-import * as Tone from "tone";
+import styled from "styled-components";
 
-// export const oscOneDelay = new Tone.PingPongDelay({
-//   delayTime: .75,
-//   maxDelay: 1,
-//   feedback: .35,
-//   wet: .75,
-// }).connect(oscOneVolume);
+const StyledCircleSlider = styled(CircleSlider)`
+  svg circle:nth-child(2) {
+    fill: #f34143; /* Set the desired fill color */
+  }
+`;
 
 export function EffectsController({
   type,
@@ -52,12 +50,14 @@ export function EffectsController({
   return (
     <Fragment>
       <div className={`${type}_DLY_WET`}>
-        <CircleSlider
+        <StyledCircleSlider
           size={90}
-          knobColor="#005a58"
+          gradientColorFrom="black"
+          knobColor="#ff5722"
+          gradientColorTo="gray"
+          progressWidth={11}
           knobRadius={7}
-          progressWidth={10}
-          circleWidth={9}
+          circleWidth={10}
           shadow={true}
           onChange={changeDlyWet}
           value={dlyWet}
@@ -74,10 +74,12 @@ export function EffectsController({
       <div className={`${type}_DLY_FBK`}>
         <CircleSlider
           size={90}
+          gradientColorFrom="black"
+          knobColor="#ff5722"
+          gradientColorTo="gray"
+          progressWidth={11}
           knobRadius={7}
-          fillColor={"black"}
-          color={"black"}
-          progressWidth={10}
+          circleWidth={10}
           onChange={changeDlyFbk}
           value={dlyFbk}
           stepSize={0.1}
@@ -93,13 +95,16 @@ export function EffectsController({
       <div className={`${type}_DLY_TIME`}>
         <CircleSlider
           size={90}
+          gradientColorFrom="black"
+          knobColor="#ff5722"
+          gradientColorTo="gray"
+          progressWidth={11}
           knobRadius={7}
-          progressWidth={1}
           circleWidth={10}
-          stepSize={0.05}
+          stepSize={0.01}
           onChange={changeDlyTime}
           min={0}
-          max={15}
+          max={10}
           Value={dlyTime}
         />
       </div>
@@ -110,27 +115,20 @@ export function EffectsController({
       </div>
       .
       <div className={`${type}_REV_WET`}>
-          <Knob
-          size={100}
-          angleOffset={220}
-          angleRange={280}
-          steps={10}
+      <CircleSlider
+          size={90}
+          gradientColorFrom="black"
+          knobColor="#ff5722"
+          gradientColorTo="gray"
+          progressWidth={11}
+          knobRadius={7}
+          circleWidth={10}
+          stepSize={0.05}
+          onChange={changeRevWet}
           min={0}
           max={1}
-          onChange={changeRevWet}
-          value={revWet}
-          shadow={true}
-        >
-          <Scale tickWidth={4} tickHeight={4} radius={45} />
-          <circle r="35" cx="50" cy="50" fill="#FC5A96" />,
-          <Pointer
-            width={4}
-            height={35}
-            radius={10}
-            type="rect"
-            color="#FC5A96"
-          />
-        </Knob>
+          Value={revWet}
+        />
       </div>
       <div className={`REVWET`}>
         Reverb
@@ -138,29 +136,23 @@ export function EffectsController({
         Wet
       </div>
       <div className={`${type}_REV_DEC`}>
-        <Knob
-          size={100}
-          angleOffset={220}
-          angleRange={280}
-          steps={10}
+      <CircleSlider
+          size={90}
+          gradientColorFrom="black"
+          knobColor="#ff5722"
+          gradientColorTo="gray"
+          progressWidth={11}
+          knobRadius={7}
+          circleWidth={10}
+          stepSize={0.05}
+          onChange={changeRevDecay}
           min={0}
           max={1}
-          onChange={changeRevDecay}
-          value={revDecay}
-        >
-          <Scale tickWidth={4} tickHeight={4} radius={45} />
-          <circle r="35" cx="50" cy="50" fill="#FC5A96" />,
-          <Pointer
-            width={4}
-            height={35}
-            radius={10}
-            type="rect"
-            color="#FC5A96"
-          />
-        </Knob>
+          Value={revDecay}
+        />
       </div>
       <div className={`REVDEC`}>Reverb Decay</div>
-      <div className={`EFXTITLE`}>Effects</div>
+      <div className={`EFXTITLE`}>EFFECTS</div>
     </Fragment>
   );
 }

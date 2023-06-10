@@ -52,22 +52,19 @@ function App() {
   const [oscOneEnvelope, setOscOneEnvelope] = useState({
     attack: 0.6,
     decay: 0.0,
-    sustain: 1,
-    release: 0.1,
+    sustain: 0,
   });
 
   const [oscTwoEnvelope, setOscTwoEnvelope] = useState({
     attack: 0.6,
     decay: 0.0,
-    sustain: 1,
-    release: 0.1,
+    sustain: 0,
   });
 
   const [oscThreeEnvelope, setOscThreeEnvelope] = useState({
     attack: 0.6,
     decay: 0.0,
-    sustain: 1,
-    release: 0.1,
+    sustain: 0,
   });
 
   const [oscillatorType, setOscillatorType] = useState("triangle");
@@ -191,7 +188,6 @@ function App() {
               envAttack={oscOneEnvelope.attack}
               envDecay={oscOneEnvelope.decay}
               envSustain={oscOneEnvelope.sustain}
-              envRelease={oscOneEnvelope.release}
               updateEnvelope={updateEnvelope}
             />
             <EnvelopeController
@@ -199,7 +195,6 @@ function App() {
               envAttack={oscTwoEnvelope.attack}
               envDecay={oscTwoEnvelope.decay}
               envSustain={oscTwoEnvelope.sustain}
-              envRelease={oscTwoEnvelope.release}
               updateEnvelope={updateEnvelope}
             />
             <EnvelopeController
@@ -207,20 +202,19 @@ function App() {
               envAttack={oscThreeEnvelope.attack}
               envDecay={oscThreeEnvelope.decay}
               envSustain={oscThreeEnvelope.sustain}
-              envRelease={oscThreeEnvelope.release}
               updateEnvelope={updateEnvelope}
             />
           </div>
           <div className="lfoSection">
             <LFOController
               type={"OSC1"}
-              sineTremolo={oscTwoTremolo}
-              sineVibrato={oscTwoVibrato}
+              sineTremolo={oscOneTremolo}
+              sineVibrato={oscOneVibrato}
             />
             <LFOController
               type={"OSC2"}
-              sineTremolo={oscOneTremolo}
-              sineVibrato={oscOneVibrato}
+              sineTremolo={oscTwoTremolo}
+              sineVibrato={oscTwoVibrato}
             />
             <LFOController
               type={"OSC3"}

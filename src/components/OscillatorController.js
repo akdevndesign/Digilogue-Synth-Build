@@ -2,8 +2,8 @@ import { useRef, Fragment, useState } from "react";
 import { CircleSlider } from "react-circle-slider";
 import Form from "react-bootstrap/Form";
 import * as Tone from "tone";
+
 import "../css/Oscillator.css";
-import { Knob, Pointer, Scale, Value } from "rc-knob";
 
 export function Oscillator({
   type,
@@ -32,68 +32,90 @@ export function Oscillator({
     synth.oscillator.frequency.value = newFrequency;
     updateFrequency(type, newFrequency); // Update the frequency in the parent component
   };
-  // // Set volume to zero and change status to "OFF"
-  // if (status) {
-  //   synthVolume.volume.linearRampTo(-Infinity, 0.1, Tone.now());
 
-  // Return the JSX for the oscillator component
   return (
     <Fragment>
-    <div className={type} id="oscSwitch">
+      <div className={type} id="oscSwitch">
         <Form>
-          <div key="inline-radio" className="mb-3">
-            <Form.Check
-              inline
-              label="TRI"
-              name={`group_${type}`} // Use a unique name for each oscillator
-              type="radio"
-              value="triangle"
-              checked={selectedType === "triangle"} // Use the local state variable
-              onChange={handleTypeChange}
-            />
-            <Form.Check
-              inline
-              label="SAW"
-              name={`group_${type}`}
-              type="radio"
-              value="sawtooth"
-              checked={selectedType === "sawtooth"}
-              onChange={handleTypeChange}
-            />
-            <Form.Check
-              inline
-              label="SQR"
-              name={`group_${type}`}
-              type="radio"
-              value="square"
-              checked={selectedType === "square"}
-              onChange={handleTypeChange}
-            />
+          <div key="inline-radio" className="mb-3 radio-wrapper">
+          <Form.Check
+  inline
+  label={
+    <>
+      <img
+        src="https://res.cloudinary.com/dusaigbyn/image/upload/v1686377669/triangle-wave_rzs4sc.svg"
+        alt="Triangle Wave"
+        height="24"
+        width="24"
+        style={{ marginRight: '5px' }}
+      />
+    </>
+  }
+  name={`group_${type}`}
+  type="radio"
+  value="triangle"
+  checked={selectedType === "triangle"}
+  onChange={handleTypeChange}
+  id={`radio-${type}-triangle`}
+/>
+<Form.Check
+  inline
+  label={
+    <>
+      <img
+        src="https://res.cloudinary.com/dusaigbyn/image/upload/v1686377669/sawtooth-wave_ev2xwr.svg"
+        alt="Sawtooth Wave"
+        height="24"
+        width="24"
+        style={{ marginRight: '5px' }}
+      />
+    </>
+  }
+  name={`group_${type}`}
+  type="radio"
+  value="sawtooth"
+  checked={selectedType === "sawtooth"}
+  onChange={handleTypeChange}
+  id={`radio-${type}-sawtooth`}
+/>
+<Form.Check
+  inline
+  label={
+    <>
+      <img
+        src="https://res.cloudinary.com/dusaigbyn/image/upload/v1686377670/square-wave_b7kr7z.svg"
+        alt="Square Wave"
+        height="24"
+        width="24"
+        style={{ marginRight: '5px' }}
+      />
+    </>
+  }
+  name={`group_${type}`}
+  type="radio"
+  value="square"
+  checked={selectedType === "square"}
+  onChange={handleTypeChange}
+  id={`radio-${type}-square`}
+/>
           </div>
         </Form>
       </div>
       <div className={`${type}_VOL`}>
-          <Knob
-          snap={true}
-          size={100}
-          angleOffset={220}
-          angleRange={280}
-          steps={20}
+        <CircleSlider
+          onChange={handleChange}
           min={-40}
           max={-5}
-          onChange={handleChange}
           value={dialVolSynth.current}
-        >
-          <Scale tickWidth={4} tickHeight={4} radius={45} />
-          <circle r="35" cx="50" cy="50" fill="#FC5A96" />,
-          <Pointer
-            width={4}
-            height={35}
-            radius={10}
-            type="rect"
-            color="#FC5A96"
-          />
-        </Knob>
+          stepSize={1}
+          size={90}
+          gradientColorFrom="black"
+          knobColor="#ff5722"
+          gradientColorTo="gray"
+          progressWidth={11}
+          knobRadius={7}
+          circleWidth={10}
+        />
       </div>
       <div className={`VOLW`}>VOLUME</div>
       <div className={`DIGI`}>DIGILOGUE</div>
@@ -101,13 +123,16 @@ export function Oscillator({
         <CircleSlider
           onChange={handleChangeFreq}
           min={10}
-          max={1000}
+          max={800}
           value={freqSynth.current}
           stepSize={1}
           size={90}
+          gradientColorFrom="black"
+          knobColor="#ff5722"
+          gradientColorTo="gray"
+          progressWidth={11}
           knobRadius={7}
-          progressWidth={10}
-          circleWidth={9}
+          circleWidth={10}
         />
       </div>
       <div className={`FREQW`}>FREQUENCY</div>

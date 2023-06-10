@@ -1,6 +1,5 @@
 import { Fragment, useState } from "react";
 import { CircleSlider } from "react-circle-slider";
-import * as Tone from "tone";
 
 export function FilterController({ type, oscFilterQ, OscFilterFrequency }) {
   const [qFltr, setQFltr] = useState(0);
@@ -21,14 +20,18 @@ export function FilterController({ type, oscFilterQ, OscFilterFrequency }) {
       <div className={`${type}_Q_FLTR`}>
         <CircleSlider
           size={90}
+          gradientColorFrom="black"
+          knobColor="#ff5722"
+          gradientColorTo="gray"
+          progressWidth={11}
           knobRadius={7}
-          progressWidth={10}
-          circleWidth={9}
+          circleWidth={10}
           onChange={changeQ}
           value={qFltr}
           stepSize={1}
           min={0}
           max={20}
+          fillColor="#FF0000"
         />
       </div>
       <div className={`FLTRQ`}>
@@ -40,10 +43,12 @@ export function FilterController({ type, oscFilterQ, OscFilterFrequency }) {
       <div className={`${type}_FREQ_FLTR`}>
         <CircleSlider
           size={90}
+          gradientColorFrom="black"
+          knobColor="#ff5722"
+          gradientColorTo="gray"
+          progressWidth={11}
           knobRadius={7}
-          progressWidth={1}
           circleWidth={10}
-          knobColor="#005a58"
           stepSize={20}
           onChange={changeFrequency}
           min={0}

@@ -1,6 +1,62 @@
 .app { 
     background-color: #595959;
 }
+.radio-wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .radio-wrapper .form-check {
+    padding-top: 25px;
+    padding-left: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-right: 10px;
+    justify-content: center; /* Center the radio buttons */
+  }
+  
+  .radio-wrapper .form-check .form-check-input {
+    display: none;
+  }
+  
+  .radio-wrapper .form-check .form-check-label {
+    position: relative;
+    padding-bottom: 20px;
+    cursor: pointer;
+  }
+  
+  .radio-wrapper .form-check .form-check-label::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .radio-wrapper .form-check .form-check-input:checked + .form-check-label::before {
+    background-color: #ccc;
+  }
+  
+  .radio-wrapper .form-check .form-check-input:checked + .form-check-label::after {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #000;
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
 
 .container {
     background-image: url("https://res.cloudinary.com/dusaigbyn/image/upload/v1686177549/pexels-fwstudio-172296_pvos6a.jpg");
@@ -21,7 +77,7 @@
 .OSCIS {
     
     display: grid;
-    grid-template-columns: 400px 1fr 1fr 1fr 1fr;
+    grid-template-columns: 440px 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr;
     gap: 0px 0px;
     min-height: 0;
@@ -43,7 +99,7 @@
 .oscSection {
     grid-area: oscSection;
     display: grid;
-    grid-template-columns: 200px 1fr 1fr;
+    grid-template-columns: 230px 1fr 1fr;
     grid-template-rows: 0.5fr 1fr 1fr 1fr 0.5fr;
     gap: 0px 0px;
     grid-template-areas:
@@ -86,17 +142,17 @@
 .envSection{
     grid-area: envSection;
     display: grid;
-    width: 345px;
-    grid-template-columns: 85px 85px 85px 85px;
+    width: 295px;
+    grid-template-columns: 85px 85px 85px;
     grid-template-rows: 0.5fr 1fr 1fr 1fr 0.5fr;
     gap: 0px 0px;
     grid-auto-flow: row;
     grid-template-areas:
-        "ENVATK ENVDEC ENVSUS ENVREL"
-        "OSC1_ENV_ATK OSC1_ENV_DECAY OSC1_ENV_SUS OSC1_ENV_REL"
-        "OSC2_ENV_ATK OSC2_ENV_DECAY OSC2_ENV_SUS OSC2_ENV_REL"
-        "OSC3_ENV_ATK OSC3_ENV_DECAY OSC3_ENV_SUS OSC3_ENV_REL"
-        "ENVTITLE . . .";
+        "ENVATK ENVDEC ENVSUS"
+        "OSC1_ENV_ATK OSC1_ENV_DECAY OSC1_ENV_SUS"
+        "OSC2_ENV_ATK OSC2_ENV_DECAY OSC2_ENV_SUS"
+        "OSC3_ENV_ATK OSC3_ENV_DECAY OSC3_ENV_SUS"
+        "ENVTITLE . .";
         background-color: transparent;
         justify-self: center;
         background-color: rgb(187, 187, 187);
@@ -156,11 +212,13 @@
 
 .oscSwitch {
 width: 100px;
+justify-content: center;
 }
 .LFOTITLE {
     grid-area: LFOTITLE;
     font-size: 43pt;
     text-align: left;
+    font-weight: bold;
     white-space: nowrap; /* Prevent text from wrapping */
     overflow: visible; /* Enable horizontal scrolling for overflow */
 }
@@ -168,6 +226,7 @@ width: 100px;
     grid-area: FLTITLE;
     font-size: 43pt;
     text-align: left;
+    font-weight: bold;
     white-space: nowrap; /* Prevent text from wrapping */
     overflow: visible; /* Enable horizontal scrolling for overflow */
 }
@@ -176,11 +235,13 @@ width: 100px;
     font-size: 43pt;
     text-align: left;
     white-space: nowrap; /* Prevent text from wrapping */
+    font-weight: bold;
     overflow: visible; /* Enable horizontal scrolling for overflow */
 }
 .OSCTITLE {
     grid-area: OSCTITLE;
     font-size: 43pt;
+    font-weight: bold;
     text-align: left;
     white-space: nowrap; /* Prevent text from wrapping */
     overflow: visible; /* Enable horizontal scrolling for overflow */
@@ -262,6 +323,7 @@ width: 100px;
 .FLTRQ {
     grid-area: FLTRQ;
     text-align: center;
+    font-weight: bold;
 }
 .REVDEC {
     grid-area: REVDEC;
@@ -295,17 +357,22 @@ width: 100px;
 }
 .FLFREQ {
     grid-area: FLFREQ;
+    font-weight: bold;
 }
 
 .osc1 {
     grid-area: OSC1;
+    align-items: center;
 }
 
 .DIGI {
     grid-area: DIGI;
-    font-weight: bold;
-    font-size: 24pt;
-    align-items: center;
+    font-size: 30pt;
+    font-family: 'Gasoek One', serif;
+    position: relative;
+    bottom: 14px;
+    padding-right: 20px;
+    color: #ff5722
 }
 
 .OSC2 {
@@ -330,6 +397,7 @@ width: 100px;
 .VOLW {
     grid-area: VOLW;
     text-align: center;
+    font-weight: bold;
 }
 
 .FLDT {
@@ -463,16 +531,9 @@ width: 100px;
     grid-area: OSC3_LFO_FREQ;
 }
 
-.NOISE_LFO {
-    grid-area: NOISE_LFO;
-}
-
-.NOISE_LFO_FREQ {
-    grid-area: NOISE_LFO_FREQ;
-}
-
 .AMW {
     grid-area: AMW;
+    font-weight: bold;
 }
 
 .OSC3_LFOW {
@@ -493,10 +554,12 @@ width: 100px;
 
 .AMWF {
     grid-area: AMWF;
+    font-weight: bold;
 }
 
 .FREQW {
     grid-area: FREQW;
+    font-weight: bold;
 }
 
 .OSC1_ENV_ATK {
@@ -504,18 +567,21 @@ width: 100px;
 }
 .ENVATK {
     grid-area: ENVATK;
+    font-weight: bold;
 }
 .OSC1_ENV_DECAY {
     grid-area: OSC1_ENV_DECAY;
 }
 .ENVDEC {
     grid-area: ENVDEC;
+    font-weight: bold;
 }
 .OSC1_ENV_SUS {
     grid-area: OSC1_ENV_SUS;
 }
 .ENVSUS {
     grid-area: ENVSUS;
+    font-weight: bold;
 }
 .OSC1_ENV_REL {
     grid-area: OSC1_ENV_REL;

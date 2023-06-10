@@ -2,11 +2,15 @@ import * as Tone from "tone";
 
 export const oscOneVolume = new Tone.Volume(-10).toDestination();
 
+export const oscOneLimiter = new Tone.Limiter({
+  threshold: -10,
+}).connect(oscOneVolume);
+
 export const oscOneReverb = new Tone.Freeverb({
   roomSize: 0,
   wet: .5,
  
-}).connect(oscOneVolume);
+}).connect(oscOneLimiter);
 
 console.log("oscOneReverb: ", oscOneReverb.decay)
 export const oscOneDelay = new Tone.PingPongDelay({
